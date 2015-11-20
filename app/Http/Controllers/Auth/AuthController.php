@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\login\DoLoginRequest;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -22,12 +27,56 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    protected $redirectPath = 'home';
+    protected $loginPath = '/login';
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
+    public function login()
+    {
+        return view('login.login');
+    }
+
+    public function doLogin(DoLoginRequest $request)
+    {
+
+
+    }
+
+    public function redirectToProvider($type)
+    {
+        return Socialite::driver($type)->redirect();
+    }
+
+    public function handleProviderCallback($type)
+    {
+        $user = Socialite::driver($type)->user();
+
+        $exitingUser = User::where('email', $user->email)->first();
+        //check user ada di database
+        if ($exitingUser instanceof User)
+        {
+            //user ada
+            auth()->LoginUsingId($exitingUser->id);
+
+            return redirect('home');
+        } else {
+            $newUser = User::create([
+                'name'      => $user->name,
+                'username'  => $user->nickname,
+                'password'  => str_random(6),
+                'email'     => $user->email
+            ]);
+
+            auth()->loginUsingId($newUser->id);
+
+            return redirect('home');
+        }
+    }
+
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
@@ -61,5 +110,11 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Redirect::to('login');
     }
 }
