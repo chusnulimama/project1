@@ -20,20 +20,22 @@
 {{--main content--}}
     <div id="login-page">
         <div class="container">
-            {!! Form::open(['url' => route('login')]) !!}
+            {!! Form::open(['url' => route('login.login')]) !!}
                 <h2 class="form-login-heading">Sign in now</h2>
                 <div class="login-wrap">
                     {!! Form::text('email', Input::old('email'), ['class' => 'form-control', 'placeholder' => 'Email']) !!}
                     <br>
                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
-                    {!! Form::label('class' => 'checkbox', 'span' => 'pull-right') !!}
+                    <label for="remember" class="checkbox-inline">
+                        <input type="checkbox" name="remember" value="1"> <span>Remember</span>
+                    </label>
 
                     <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>SIGN IN</button>
                     <hr>
 
                     <div class="login-social-link centered">
                         <p>Sign in via your social network</p>
-                            <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i>Facebook</button>
+                            <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i>acebook</button>
                             <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i>Twitter</button>
                     </div>
 

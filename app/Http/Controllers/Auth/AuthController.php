@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\login\DoLoginRequest;
+use App\Jobs\login\DoLogin;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\View;
 
 class AuthController extends Controller
 {
@@ -27,8 +29,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-    protected $redirectPath = 'home';
-    protected $loginPath = '/login';
+    protected $redirectPath = '/home';
+    protected $loginPath = '/login/login';
 
     /**
      * Create a new authentication controller instance.
@@ -42,8 +44,12 @@ class AuthController extends Controller
 
     public function doLogin(DoLoginRequest $request)
     {
-
-
+        try{
+            $this->dispatch(new DoLogin($request));
+        }catch (\Exception $e){
+            return redirect()->back();
+        }
+       return view('layouts.master');
     }
 
     public function redirectToProvider($type)
@@ -62,7 +68,7 @@ class AuthController extends Controller
             //user ada
             auth()->LoginUsingId($exitingUser->id);
 
-            return redirect('home');
+            return redirect('layouts.master');
         } else {
             $newUser = User::create([
                 'name'      => $user->name,
@@ -73,7 +79,7 @@ class AuthController extends Controller
 
             auth()->loginUsingId($newUser->id);
 
-            return redirect('home');
+            return redirect('layouts.master');
         }
     }
 
@@ -115,6 +121,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return Redirect::to('login');
+        return Redirect::to('/login/login');
     }
 }

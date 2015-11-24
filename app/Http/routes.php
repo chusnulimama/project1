@@ -11,6 +11,15 @@
 |
 */
 
+Route::get('/login/login', [
+    'as'    => 'login.login',
+    'uses'  => 'Auth\AuthController@login'
+]);
+
+Route::get('/home', 'HomeController@index');
+Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{driver}/callback', 'Auth\AuthController@handleProviderCallback');
+
 Route::get('/', function () {
     return view('welcome');
 });
