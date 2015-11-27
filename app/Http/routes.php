@@ -17,6 +17,9 @@ Route::get('/login/login', [
 ]);
 
 Route::get('/home', 'HomeController@index');
+Route::get('/book', 'BookController@index');
+Route::get('/book/create', 'BookController@create');
+Route::get('/book/edit', 'BookController@edit');
 Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{driver}/callback', 'Auth\AuthController@handleProviderCallback');
 
