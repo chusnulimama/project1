@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('category');
             $table->string('realese');
             $table->integer('stock');
+            $table->string('cover');
         });
     }
 

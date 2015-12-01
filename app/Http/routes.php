@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/login/login', [
+Route::get('/login', [
     'as'    => 'login.login',
     'uses'  => 'Auth\AuthController@login'
 ]);

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class BookController extends Controller
 {
@@ -16,7 +20,12 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('/layouts/master/books/books');
+        $books = DB::table('books')->paginate(5);
+        $books =
+            [
+              'books' => $books
+            ];
+        return view('/layouts/master/books/books', $books);
     }
 
     /**
@@ -35,9 +44,16 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try {
+            $this->dispatch(new CreateBook($request));
+        } catch (\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        Session::flash('message', 'Data berhasil ditambahkan')
+        return Redirect::to('/layouts/master/books/books');
     }
 
     /**
@@ -59,8 +75,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-//        ??
-        return view('/layouts/master/book/books_edit');
+        $book = Book::find($id);
+        return view('/layouts/master/book/books_edit')->with('book', $book);
     }
 
     /**
@@ -72,7 +88,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

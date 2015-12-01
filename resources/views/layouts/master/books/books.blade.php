@@ -30,7 +30,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <a href="{!! URL::to('/book#myModal') !!}" class="btn btn-primary btn-xs" role="button"><i class="fa fa-eye"></i></a>
+                        <a href="#myModal" class="btn btn-primary btn-xs" role="button" data-toggle="modal"><i class="fa fa-eye"></i></a>
                         {{--<button class="btn btn-success btn-xs"><a href="{!! URL::to('/book#myModal') !!}"><i class="fa fa-eye"></i></a></button>--}}
                         <button class="btn btn-warning btn-xs"><a href="{!! URL::to('/book/edit') !!}"><i class="fa fa-pencil"></i></a></button>
                         <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
