@@ -1,5 +1,5 @@
         <!--sidebar menu start-->
-        <ul class="sidebar-menu" id="nav-according">
+        <ul class="sidebar-menu" id="nav-accordion">
 
             <p class="centered"><a href="profile"><img src="assets/img/JPbooks-logo.jpg" class="img-circle" width="80"></a></p>
             <h5 class="centered">JP-Books Store</h5>
@@ -10,12 +10,12 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li class="submenu dropdown">
-                <a drop-toggle="dropdown" href="javascript:;">
+            <li class="sub-menu">
+                <a href="javascript:;">
                     <i class="fa fa-briefcase"></i>
                     <span>Data Master</span>
                 </a>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="sub">
                     <li><a href="{{URL::to('/master/employee')}}">Employee's</a></li>
                     <li><a href="{{URL::to('/master/goods')}}">Good's</a></li>
                     <li><a href="{{URL::to('/master/supp')}}">Supplier's</a></li>
@@ -24,24 +24,24 @@
                 </ul>
             </li>
 
-            <li class="submenu">
+            <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-desktop"></i>
                     <span>Transaction</span>
+                </a>
                     <ul class="sub">
                         <li><a href="{{URL::to('/trans/receive')}}">Receive Transaction</a></li>
                         <li><a href="{{URL::to('/trans/sale')}}">Sales Transaction</a></li>
                     </ul>
-                </a>
             </li>
-            <li class="submenu">
+            <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-desktop"></i>
                     <span>Report</span>
+                </a>
                     <ul class="sub">
                         <li><a href="{{URL::to('/report/receive')}}">Receipt</a></li>
                         <li><a href="{{URL::to('/report/sale')}}">Sales</a></li>
                     </ul>
-                </a>
             </li>
         </ul>

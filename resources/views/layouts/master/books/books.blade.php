@@ -38,11 +38,11 @@
                     </tbody>
                 </table>
             </div>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modalfade">
+            <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            {{--<button class="close" data-dismiss="modal" aria-hidden="true">%times</button>--}}
+                            <button class="close" data-dismiss="modal" aria-label="true"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Detail Buku</h4>
                         </div>
                         <div class="modal-body">
@@ -54,7 +54,7 @@
                             <p>Harga/Stok : ***/***</p>
                         </div>
                         <div class="modal-footer">
-                            <a href="{!! URL::to('/book') !!}" class="btn btn-default" role="button">Cancel</a>
+                            <a href="{!! URL::to('/book') !!}" class="btn btn-default" role="button">Ok</a>
                             {{--<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">--}}
                             {{--<button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>--}}
                         </div>

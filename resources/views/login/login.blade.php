@@ -14,19 +14,23 @@
     {{--costum styles for this telmplate--}}
     {!! HTML::style('assets/css/style.css') !!}
     {!! HTML::style('assets/css/style-resposive.css') !!}
+    {!! HTML::style('assets/css/custom.css') !!}
+
 </head>
 <body>
 
 {{--main content--}}
+{{--<img src="assets/img/login-bg.jpg">--}}
     <div id="login-page">
         <div class="container">
-            {!! Form::open(['url' => route('login.login')]) !!}
+            <form action="{!! URL::to('/login/login') !!}" class="form-login">
                 <h2 class="form-login-heading">Sign in now</h2>
                 <div class="login-wrap">
-                    {!! Form::text('email', Input::old('email'), ['class' => 'form-control', 'placeholder' => 'Email']) !!}
+                    <input type="text" class="form-control" placeholder="User ID/E-mail" autofocus>
                     <br>
-                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
-                    <label for="remember" class="checkbox-inline">
+                    <input type="password" class="form-control" placeholder="Password">
+                    <label for="" class="checkbox-inline">
+                        <br>
                         <input type="checkbox" name="remember" value="1"> <span>Remember</span>
                     </label>
 
@@ -40,7 +44,7 @@
                     </div>
 
                 </div>
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 {{--is places at the end of document so the pages load faster--}}
@@ -48,10 +52,10 @@
 {!! HTML::script('assets/js/bootstrap.min.js') !!}
 
         <!--BACKSTRETCH-->
-<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+<!-- Mengatur Backgroundnya -->
 <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
 <script>
-    $.backstretch("assets/img/login-bg.jpg", {speed: 500});
+    $.backstretch("{{assets('img/login-bg.jpg')}}", {speed: 500});
 </script>
 
 </body>

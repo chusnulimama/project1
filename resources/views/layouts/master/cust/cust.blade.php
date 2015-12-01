@@ -53,7 +53,7 @@
                             <p>Note : ***</p>
                         </div>
                         <div class="modal-footer">
-                            <a href="{!! URL::to('/cust') !!}" class="btn btn-default" role="button"></a>
+                            <a href="{!! URL::to('/cust') !!}" class="btn btn-default" role="button">Close</a>
                         </div>
                     </div>
                 </div>
