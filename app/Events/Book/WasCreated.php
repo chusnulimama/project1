@@ -6,6 +6,7 @@ use App\Book;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Support\Facades\DB;
 
 class WasCreated extends Event
 {

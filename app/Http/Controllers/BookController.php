@@ -52,8 +52,8 @@ class BookController extends Controller
             dd($msgerror->getMessage());
         }
 
-        Session::flash('message', 'Data berhasil ditambahkan')
-        return Redirect::to('/layouts/master/books/books');
+        Session::flash('message', 'Data berhasil ditambahkan');
+        return redirect('/book');
     }
 
     /**
