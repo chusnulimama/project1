@@ -26,7 +26,7 @@ class CreateBook extends Job implements SelfHandling
      */
     public function handle(Dispatcher $event)
     {
-        $book = Book::create($this->request->all());
+        $book = Book::create($this->request->input('book'));
 
         $event->fire(new WasCreated($book));
     }

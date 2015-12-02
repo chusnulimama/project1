@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Jobs\Book\CreateBook;
 use App\Http\Requests\Book\CreateRequest;
 
 class BookController extends Controller
@@ -47,14 +48,14 @@ class BookController extends Controller
      */
     public function store(CreateRequest $request)
     {
+        $this->dispatch(new CreateBook($request));
         try {
-            $this->dispatch(new CreateBook($request));
         } catch (\Exception $msgerror){
             dd($msgerror->getMessage());
         }
 
         Session::flash('message', 'Data berhasil ditambahkan');
-        return redirect('/book');
+        return redirect()->route('book');
     }
 
     /**
