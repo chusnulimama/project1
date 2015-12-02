@@ -32,7 +32,6 @@ class CreateRequest extends Request
             'category'  => 'required',
             'realese'   => 'required',
             'stock'     => 'required',
-            'cover'     => 'required',
         ];
     }
 }
