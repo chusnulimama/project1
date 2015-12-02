@@ -8,7 +8,7 @@
             <div class="form-panel">
                 <h4 class="mb">Input Data Buku</h4>
 
-                <form class="form-horizontal style-form" enctype="multipart/form-data">
+                <form method="POST" class="form-horizontal style-form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">
@@ -66,6 +66,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-2">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <a href="{!! URL::to('/book') !!}" class="btn btn-warning">Batal</a>
                             <input type="submit" name="btn_simpan" value="Simpan" class="btn btn-default">
                         </div>

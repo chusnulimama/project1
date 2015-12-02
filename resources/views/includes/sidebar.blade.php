@@ -17,7 +17,7 @@
                 </a>
                 <ul class="sub">
                     <li><a href="{{URL::to('/master/employee')}}">Employee's</a></li>
-                    <li><a href="{{URL::to('/master/goods')}}">Good's</a></li>
+                    <li><a href="{{URL::to('/book')}}">Good's</a></li>
                     <li><a href="{{URL::to('/master/supp')}}">Supplier's</a></li>
                     <li><a href="{{URL::to('/master/pub')}}">Publisher's</a></li>
                     <li><a href="{{URL::to('/master/cust')}}">Customer's</a></li>
