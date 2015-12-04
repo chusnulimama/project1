@@ -8,7 +8,7 @@
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i>Mengubah Data Buku</h4>
 
-                <form method="PACTH" action="{{url('/book/update'. $book->id)}}" class="form-horizontal style-form" enctype="multipart/form-data">
+                <form method="POST" action="{{url('/book/update'. $book->id)}}" class="form-horizontal style-form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">

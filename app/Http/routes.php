@@ -24,6 +24,7 @@ Route::get('/book/view/{id}', 'BookController@modal');
 Route::get('/book/create', 'BookController@create');
 Route::post('/book/create', 'BookController@store');
 Route::get('/book/edit', 'BookController@edit');
+Route::post('/book/update/{id}', 'BookController@update');
 Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{driver}/callback', 'Auth\AuthController@handleProviderCallback');
 
