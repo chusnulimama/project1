@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use App\Jobs\Book\CreateBook;
+use App\Jobs\Book\UpdateBook;
 use App\Http\Requests\Book\CreateRequest;
 
 class BookController extends Controller
@@ -48,8 +49,10 @@ class BookController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $this->dispatch(new CreateBook($request));
+        $bookId = Book::find($id);
+
         try {
+            $this->dispatch(new CreateBook($request));
         } catch (\Exception $msgerror){
             dd($msgerror->getMessage());
         }
@@ -78,7 +81,7 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        return view('/layouts/master/book/books_edit')->with('book', $book);
+        return view('/layouts/master/books/books_edit')->with('book', $book);
     }
 
     /**
@@ -88,12 +91,17 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+
+    public function update($id, Request $request)
     {
-        $bookUpdate=Request::all();
-        $book=Book::find($id);
-        $book->update($bookUpdate);
-        return redirect('/book');
+        try{
+            $this->dispatch(new UpdateBook($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        Session::flash('message', 'Data Berhasil dihapus');
+        return redirect()->route('book');
     }
 
     /**

@@ -23,7 +23,11 @@ Route::get('/book', [
 Route::get('/book/view/{id}', 'BookController@modal');
 Route::get('/book/create', 'BookController@create');
 Route::post('/book/create', 'BookController@store');
-Route::get('/book/edit', 'BookController@edit');
+Route::get('/book/edit/{id}', 'BookController@edit');
+Route::post('/book/update/{id}', [
+    'as' => 'book',
+    'uses' => 'BookController@update']);
+Route::get('/book/destroy/{id}', 'BookController@destroy');
 Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{driver}/callback', 'Auth\AuthController@handleProviderCallback');
 

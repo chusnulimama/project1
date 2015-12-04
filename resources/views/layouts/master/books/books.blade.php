@@ -40,8 +40,8 @@
                             <td class="centered">
                                 <a href="{{url('/book/view/'. $book->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
                                 {{--<button class="btn btn-success btn-xs"><a href="{!! URL::to('/book#myModal') !!}"><i class="fa fa-eye"></i></a></button>--}}
-                                <button class="btn btn-warning btn-xs"><a href="{!! URL::to('/book/edit') !!}"><i class="fa fa-pencil"></i></a></button>
-                                <button type="submit" name="btn_delete" class="btn-danger btn-xs"><a href="{{ url('/book/destroy') }}"><i class="fa fa-trash-o"></i></a></button>
+                                <button class="btn btn-warning btn-xs"><a href="{{ url('/book/edit/'.$book->id) }}"><i class="fa fa-pencil"></i></a></button>
+                                <button type="submit" name="btn_delete" class="btn-danger btn-xs"><a href="{{ url('/book/destroy/'.$book->id) }}"><i class="fa fa-trash-o"></i></a></button>
                             </td>
                         </tr>
                         @endforeach
