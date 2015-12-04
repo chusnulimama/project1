@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher');
             $table->string('supplier');
             $table->string('category');
-            $table->string('realese');
+            $table->string('release');
             $table->integer('stock');
             $table->string('cover');
         });

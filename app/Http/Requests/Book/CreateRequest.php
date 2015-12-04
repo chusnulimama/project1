@@ -24,14 +24,10 @@ class CreateRequest extends Request
     public function rules()
     {
         return [
-            'ISBN'      => 'required',
-            'name'      => 'required',
-            'author'    => 'required',
-            'publisher' => 'required',
-            'supplier'  => 'required',
-            'category'  => 'required',
-            'realese'   => 'required',
-            'stock'     => 'required',
+            'book.ISBN'     => 'required',
+            'book.name'     => 'required',
+            'book.stock'    => 'required',
+            'book.category' => 'required',
         ];
     }
 }

@@ -9,11 +9,13 @@
 namespace App;
 
 
-use Guzzle\Service\Resource\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
     protected $table = 'books';
 
-    protected $fillable = ['ISBN', 'name', 'author', 'publisher', 'supplier', 'category', 'realese', 'stok'];
+    protected $fillable = ['ISBN', 'name', 'author', 'publisher', 'supplier', 'category', 'release', 'stock'];
+
+    public $timestamps = false;
 }

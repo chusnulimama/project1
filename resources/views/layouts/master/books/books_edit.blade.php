@@ -6,13 +6,13 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <h4 class="mb"><i class="fa fa-angle-right"></i>Input Data Buku</h4>
+                <h4 class="mb"><i class="fa fa-angle-right"></i>Mengubah Data Buku</h4>
 
-                <form class="form-horizontal style-form" enctype="multipart/form-data">
+                <form method="PACTH" action="{{url('/book/update'. $book->id)}}" class="form-horizontal style-form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" disable>
+                            <input type="text" class="form-control" name="book[ISBN]"  disable>
                         </div>
                     </div>
                     <div class="form-group">

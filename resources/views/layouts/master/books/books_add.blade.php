@@ -9,10 +9,11 @@
                 <h4 class="mb">Input Data Buku</h4>
 
                 <form method="POST" class="form-horizontal style-form" enctype="multipart/form-data">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('book.ISBN') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="book[ISBN]" value="{{old('book.ISBN')}}">
+                            {!! $errors->first('book.ISBN', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -24,7 +25,12 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Kategori</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="book[category]" value="{{old('book.category')}}">
+                            {{--<input type="text" class="form-control" name="book[category]" value="{{old('book.category')}}">--}}
+                            <select class="form-control chosen" name="book[category]" value="{{old('book.category')}}" data-placeholder="Pilih Kategory" tabindex="1">
+                                <option value=""></option>
+                                <option value="comp">Ilmu Pengetahuan & Teknologi</option>
+                                <option value="sains">Sains</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -48,7 +54,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Tahun Terbitan Buku</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="book[realese]" value="{{old('book.realese')}}">
+                            <input type="text" class="form-control" name="book[release]" value="{{old('book.release')}}">
                         </div>
                     </div>
                     <div class="form-group">

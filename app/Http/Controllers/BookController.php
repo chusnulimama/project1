@@ -88,9 +88,12 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-
+        $bookUpdate=Request::all();
+        $book=Book::find($id);
+        $book->update($bookUpdate);
+        return redirect('/book');
     }
 
     /**
@@ -101,6 +104,16 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::find($id)->delete();
+        return redirect('/book');
+    }
+
+    public function modal($id)
+    {
+        $book = Book::find($id);
+
+        if(! $book instanceof Book) abort(404);
+
+        return view('layouts.master.modal.book', ['book'=> $book]);
     }
 }
