@@ -110,7 +110,9 @@ class BookController extends Controller
         }
 
         Session::flash('message', 'Data Berhasil diperbaharui');
-        return redirect()->route('book.update');
+        return redirect()->back();
+
+
     }
 
     /**
