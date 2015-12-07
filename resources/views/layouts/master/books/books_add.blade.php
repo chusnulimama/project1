@@ -8,7 +8,7 @@
             <div class="form-panel">
                 <h4 class="mb">Input Data Buku</h4>
 
-                <form method="POST" class="form-horizontal style-form" enctype="multipart/form-data">
+                <form action="{{url('/book/create')}}" method="POST" class="form-horizontal style-form" enctype="multipart/form-data">
                     <div class="form-group {{$errors->has('book.ISBN') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">

@@ -8,7 +8,7 @@
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i>Mengubah Data Buku</h4>
 
-                <form method="post" action="{{url('/book/update/'.$book->id)}}" class="form-horizontal style-form" enctype="multipart/form-data">
+                <form method="post" action="{{route('book.update',$book->id)}}" class="form-horizontal style-form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">ISBN</label>
                         <div class="col-sm-5">
@@ -62,7 +62,8 @@
                         <div class="col-sm-2">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <a href="{!! URL::to('/book') !!}" class="btn btn-warning">Batal</a>
-                            <button type="submit" class="btn btn-default">Simpan</button>
+                            <a href="{{url('/book/update/'.$book->id)}}" class="btn btn-default">Simpan</a>
+                            {{--<button type="submit" class="btn btn-default">Simpan</button>--}}
                         </div>
                     </div>
                 </form>

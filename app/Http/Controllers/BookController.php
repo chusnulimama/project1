@@ -49,8 +49,6 @@ class BookController extends Controller
      */
     public function store(CreateRequest $request)
     {
-        $bookId = Book::find($id);
-
         try {
             $this->dispatch(new CreateBook($request));
         } catch (\Exception $msgerror){
@@ -92,16 +90,27 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+//    public function update(Book $book, Request $request)
+//    {
+//        try{
+//            $this->dispatch(new UpdateBook($request, $book));
+//        } catch(\Exception $msgerror){
+//            dd($msgerror->getMessage());
+//        }
+//        return redirect()->route('book.update');
+//    }
+
     public function update($id, Request $request)
     {
+        $book = Book::find($id);
         try{
-            $this->dispatch(new UpdateBook($request));
+            $this->dispatch(new UpdateBook($request, $book));
         } catch(\Exception $msgerror){
             dd($msgerror->getMessage());
         }
 
-        Session::flash('message', 'Data Berhasil dihapus');
-        return redirect()->route('book');
+        Session::flash('message', 'Data Berhasil diperbaharui');
+        return redirect()->route('book.update');
     }
 
     /**
@@ -113,6 +122,7 @@ class BookController extends Controller
     public function destroy($id)
     {
         Book::find($id)->delete();
+        Session::flash('message', 'Data berhasil dihapus');
         return redirect('/book');
     }
 

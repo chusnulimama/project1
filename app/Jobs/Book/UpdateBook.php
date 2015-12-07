@@ -39,7 +39,7 @@ class UpdateBook extends Job implements SelfHandling
 
     protected function updateBook()
     {
-        $data = $this->request->input(book);
+        $data = $this->request->input('book.update');
 
         $book = $this->book->update($data);
 

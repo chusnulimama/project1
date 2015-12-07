@@ -5,7 +5,7 @@
             <h5 class="centered">JP-Books Store</h5>
             
             <li class="mt">
-                <a href="home">
+                <a href="/home">
                     <i class="fa fa-dashboard"></i>
                     <span>Home</span>
                 </a>
@@ -16,11 +16,11 @@
                     <span>Data Master</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('/master/employee')}}">Employee's</a></li>
+                    <li><a href="{{URL::to('/employee')}}">Employee's</a></li>
                     <li><a href="{{URL::to('/book')}}">Good's</a></li>
-                    <li><a href="{{URL::to('/master/supp')}}">Supplier's</a></li>
-                    <li><a href="{{URL::to('/master/pub')}}">Publisher's</a></li>
-                    <li><a href="{{URL::to('/master/cust')}}">Customer's</a></li>
+                    <li><a href="{{URL::to('/supp')}}">Supplier's</a></li>
+                    <li><a href="{{URL::to('/pub')}}">Publisher's</a></li>
+                    <li><a href="{{URL::to('/cust')}}">Customer's</a></li>
                 </ul>
             </li>
 
