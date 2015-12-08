@@ -24,7 +24,7 @@
                         <th>Pemasok</th>
                         <th class="text-right">Stok Barang</th>
                         <th class="centered">Cover Buku</th>
-                        <th width="146" class="centered">Aksi</th>
+                        <th width="150" class="centered">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,13 @@
                                 <a href="{{url('/book/view/'. $book->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
                                 {{--<button class="btn btn-success btn-xs"><a href="{!! URL::to('/book#myModal') !!}"><i class="fa fa-eye"></i></a></button>--}}
                                 <button class="btn btn-warning btn-xs"><a href="{{ url('/book/edit/'.$book->id) }}"><i class="fa fa-pencil"></i></a></button>
-                                <button type="submit" name="btn_delete" class="btn-danger btn-xs"><a href="{{ url('/book/destroy/'.$book->id) }}"><i class="fa fa-trash-o"></i></a></button>
+                                <form action="{{url('/book/destroy/'.$book->id)}}" method="POST" >
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <button type="submit" class="btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
+                                </form>
+
+
+
                             </td>
                         </tr>
                         @endforeach

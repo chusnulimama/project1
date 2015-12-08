@@ -110,7 +110,7 @@ class BookController extends Controller
         }
 
         Session::flash('message', 'Data Berhasil diperbaharui');
-        return redirect()->back();
+        return redirect()->route('book');
 
 
     }
@@ -125,7 +125,7 @@ class BookController extends Controller
     {
         Book::find($id)->delete();
         Session::flash('message', 'Data berhasil dihapus');
-        return redirect('/book');
+        return redirect()->route('book');
     }
 
     public function modal($id)

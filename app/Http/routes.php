@@ -31,7 +31,7 @@ Route::get('/book/edit/{id}', 'BookController@edit');
 Route::post('/book/update/{id}', [
     'as'    => 'book.update',
     'uses'  => 'BookController@update']);
-Route::get('/book/destroy/{id}', 'BookController@destroy');
+Route::post('/book/destroy/{id}', 'BookController@destroy');
 
 //employee control
 Route::get('/employee', [

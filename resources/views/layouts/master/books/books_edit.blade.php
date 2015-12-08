@@ -63,7 +63,7 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <a href="{!! URL::to('/book') !!}" class="btn btn-warning">Batal</a>
 {{--                            <a href="{{url('/book/update/'.$book->id)}}" class="btn btn-default">Simpan</a>--}}
-                            <button type="" class="btn btn-default">Simpan</button>
+                            <button type="submit" class="btn btn-default">Simpan</button>
                         </div>
                     </div>
                 </form>
