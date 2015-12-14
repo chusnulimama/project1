@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
     protected $redirectPath = '/home';
-    protected $loginPath = '/login/login';
+    protected $loginPath = '/login';
 
     /**
      * Create a new authentication controller instance.
@@ -39,7 +39,7 @@ class AuthController extends Controller
      */
     public function login()
     {
-        return view('login.login');
+        return view('/login/login');
     }
 
     public function doLogin(DoLoginRequest $request)

@@ -12,7 +12,7 @@
 */
 
 Route::get('/login', [
-    'as'    => 'login.login',
+    'as'    => 'login',
     'uses'  => 'Auth\AuthController@login'
 ]);
 

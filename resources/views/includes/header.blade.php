@@ -8,7 +8,7 @@
 
     <div class="top-menu">
         <ul class="nav pull-right top-menu">
-            <li><a href="logout" class="logout">Logout</a></li>
+            <li><a href="{{url('')}}" class="logout">Logout</a></li>
         </ul>
     </div>
 </header>
