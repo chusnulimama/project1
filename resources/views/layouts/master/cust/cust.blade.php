@@ -8,11 +8,15 @@
             <div class="content-panel">
                 <table class="table table-striped table-advance table-hover">
                     <h4>Daftar Pelanggan</h4>
-                    <h6><a href="{!! URL::to('/cust/create') !!}" class="btn btn-primary btn-xs" role="button"></a></h6>
+                    @if(Session::has('message'))
+                        {!! Session::get('message') !!}
+                    @endif
+
+                    <h6><a href="{{url('/customer/create')}}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
                     <hr>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Kota</th>
@@ -23,42 +27,56 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a href="{!! URL::to('/cust#myModal') !!}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                        <button class="btn btn-xs btn-primary"><a href="{!! URL::to('/cust/edit') !!}"></a><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
-
-                    </td>
+                        @foreach($user_details as $user_detail)
+                            <tr>
+                                <td>{{$user_detail->id}}</td>
+                                <td>{{$user_detail->name}}</td>
+                                <td>{{$user_detail->address}}</td>
+                                <td>{{$user_detail->city}}</td>
+                                <td>{{$user_detail->phone}}</td>
+                                <td>{{$user_detail->email}}</td>
+                                <td>{{$user_detail->note}}</td>
+                                <td>
+                                    <a href="{{url('/customer/view/'.$user_detail->id)}}" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                    <a href="{{url('/customer/edit'.$user_detail->id)}}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{url('/customer/destroy/'.$user_detail->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
                     </tbody>
                 </table>
+                <form action="" id="formDelete" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}" >
+                </form>
             </div>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modalfade">
+            <div aria-hidden="true" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Detail Pelanggan</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h5>Nama Pelanggan</h5>
-                            <p>Alamat, Kota : ***, ***</p>
-                            <p>No Telepon : ***</p>
-                            <p>E-mail : ***</p>
-                            <p>Note : ***</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{!! URL::to('/cust') !!}" class="btn btn-default" role="button">Close</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
 
-@stop
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //target link
+            $('a.btn-delete').on('click', function(e){
+                //blok default action ke href
+                e.preventDefault();
+
+                //ambil form delete
+                var form = $("#formDelete");
+
+                //ganti form action attribute dengan href attribute
+                firm.attr('action'.$(this).attr('href'));
+
+                //form submit
+                form.submit();
+            });
+        });
+    </script>
+    @endsection

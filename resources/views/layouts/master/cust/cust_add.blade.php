@@ -6,13 +6,13 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <h4 class="mb"><i class="fa fa-angle-right"></i>Input Data Pelanggan</h4>
+                <h4 class="mb">Input Data Pelanggan</h4>
 
-                <form class="form-horizontal style-form">
+                <form class="form-horizontal style-form" action="{{url('/customer/create')}}" method="post">
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">KTP</label>
+                        <label for="" class="col-sm-2 control-label"></label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="cust[name]" value="{{old('cust.name')}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -62,4 +62,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

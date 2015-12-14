@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\Jobs\Role\CreateRole;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\Role\CreateRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class CustController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +20,12 @@ class CustController extends Controller
      */
     public function index()
     {
-        $user_details = DB::table('user_details')->paginate(5);
-        $user_details =
+        $roles = Role::all();
+        $roles =
             [
-                'user_details' => $user_details
+                'roles' => $roles
             ];
-        return view('/layouts/master/cust/cust', $user_details);
+        return view('/layouts/settings/role/role', $roles);
     }
 
     /**
@@ -32,7 +35,7 @@ class CustController extends Controller
      */
     public function create()
     {
-        return view('/layouts/master/cust/cust_add');
+        return view('/layouts/settings/role/role_add');
     }
 
     /**
@@ -41,9 +44,14 @@ class CustController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateRole($request));
+        } catch (\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('role');
     }
 
     /**
@@ -88,6 +96,7 @@ class CustController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::find($id)->delete();
+        return redirect()->route('role');
     }
 }

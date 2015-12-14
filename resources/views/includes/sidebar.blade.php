@@ -7,7 +7,7 @@
             <li class="mt">
                 <a href="/home">
                     <i class="fa fa-dashboard"></i>
-                    <span>Home</span>
+                    <span>Beranda</span>
                 </a>
             </li>
             <li class="sub-menu">
@@ -16,32 +16,42 @@
                     <span>Data Master</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('/employee')}}">Employee's</a></li>
-                    <li><a href="{{URL::to('/book')}}">Good's</a></li>
-                    <li><a href="{{URL::to('/supp')}}">Supplier's</a></li>
-                    <li><a href="{{URL::to('/pub')}}">Publisher's</a></li>
-                    <li><a href="{{URL::to('/cust')}}">Customer's</a></li>
+                    <li><a href="{{URL::to('/employee')}}">Pegawai</a></li>
+                    <li><a href="{{URL::to('/book')}}">Buku</a></li>
+                    <li><a href="{{URL::to('/supp')}}">Pemasok</a></li>
+                    <li><a href="{{URL::to('/pub')}}">Penerbit</a></li>
+                    <li><a href="{{URL::to('/customer')}}">Pelanggan</a></li>
                 </ul>
             </li>
 
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-desktop"></i>
-                    <span>Transaction</span>
+                    <span>Transaksi</span>
                 </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/trans/receive')}}">Receive Transaction</a></li>
-                        <li><a href="{{URL::to('/trans/sale')}}">Sales Transaction</a></li>
+                        <li><a href="{{URL::to('/trans/receive')}}">Barang Masuk</a></li>
+                        <li><a href="{{URL::to('/trans/sale')}}">Barang Keluar</a></li>
                     </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-desktop"></i>
-                    <span>Report</span>
+                    <span>Laporan</span>
                 </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/report/receive')}}">Receipt</a></li>
-                        <li><a href="{{URL::to('/report/sale')}}">Sales</a></li>
+                        <li><a href="{{URL::to('/report/receive')}}">Pemasukkan</a></li>
+                        <li><a href="{{URL::to('/report/sale')}}">Penjualan</a></li>
                     </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-gears"></i>
+                    <span>Pengaturan</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{URL::to('/user')}}">Pengguna</a></li>
+                    <li><a href="{{URL::to('/role')}}">Role</a></li>
+                </ul>
             </li>
         </ul>

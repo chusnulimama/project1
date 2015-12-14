@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\User\CreateUser;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Guzzle\Tests\Plugin\Redirect;
 use App\Http\Requests;
+use App\Http\Requests\User\CreateRequest;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -17,7 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        $users = [
+            'users' => $users
+        ];
+        return view('layouts/settings/user/user', $users);
     }
 
     /**
@@ -27,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts/settings/user/user_add');
     }
 
     /**
@@ -36,9 +43,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateUser($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('user');
     }
 
     /**

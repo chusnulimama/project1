@@ -45,6 +45,7 @@ Route::post('/employee/update/{id}', [
     'as'    => 'employee.update',
     'uses'  => 'EmployeeController@update']);
 Route::get('/book/destroy/{id}', 'EmployeeController@destroy');
+
 //cust control
 Route::get('/customer', [
     'as'    => 'cust',
@@ -56,6 +57,32 @@ Route::post('customer/update/{id}', [
     'as'    => 'cust.update',
     'uses'  => 'CustController@update']);
 Route::get('/customer/destroy/{id}', 'CustController@destroy');
+
+//role control
+Route::get('/role', [
+    'as'    => 'role',
+    'uses'  => 'RoleController@index']);
+Route::get('/role/create', 'RoleController@create');
+Route::post('/role/create', 'RoleController@store');
+Route::get('/role/edit/{id}', 'RoleController@edit');
+Route::post('role/update/{id}', [
+    'as'    => 'role.update',
+    'uses'  => 'RoleController@update']);
+Route::get('/role/destroy/{id}', 'RoleController@destroy');
+
+//user control
+Route::get('/user', [
+    'as'    => 'user',
+    'uses'  => 'UserController@index']);
+Route::get('/user/create', 'UserController@create');
+Route::post('/user/create', 'UserController@store');
+Route::get('/user/edit/{id}', 'UserController@edit');
+Route::post('user/update/{id}', [
+    'as'    => 'user.update',
+    'uses'  => 'UserController@update']);
+Route::get('/user/destroy/{id}', 'UserController@destroy');
+
+//------------------------
 
 Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{driver}/callback', 'Auth\AuthController@handleProviderCallback');

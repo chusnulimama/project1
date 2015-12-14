@@ -12,8 +12,7 @@
                         {!! Session::get('message') !!}
                     @endif
 
-                    <h6><a href="{!! URL::to('/book/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
-                    {{--<p><a href="#" class="btn btn-primary" role="button">Tambah Buku</a></p>--}}
+                    <h6><a href="{{url('/book/create')}}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
                     <hr>
                     <thead>
                     <tr>
@@ -39,28 +38,45 @@
                             <td class="centered"><img src="{{asset('img/'.$book->cover.'.jpg')}}" height="35" width="30"></td>
                             <td class="centered">
                                 <a href="{{url('/book/view/'. $book->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                                {{--<button class="btn btn-success btn-xs"><a href="{!! URL::to('/book#myModal') !!}"><i class="fa fa-eye"></i></a></button>--}}
-                                <button class="btn btn-warning btn-xs"><a href="{{ url('/book/edit/'.$book->id) }}"><i class="fa fa-pencil"></i></a></button>
-                                <form action="{{url('/book/destroy/'.$book->id)}}" method="POST" >
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <button type="submit" class="btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
-                                </form>
-
-
-
+                                <a href="{{ url('/book/edit/'.$book->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/book/destroy/'.$book->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <form action="" id="formDelete" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                </form>
             </div>
             <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@stop
+@endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //target link delete ketika di click
+            $('a.btn-delete').on('click', function(e){
+//                block default action ke href
+                e.preventDefault();
+
+                //ambil form delete
+                var form = $("#formDelete");
+
+                //ganti form action attributedengan a href attribute
+                form.attr('action', $(this).attr('href'));
+
+                //submit form
+                form.submit();
+            });
+        });
+    </script>
+    @endsection
