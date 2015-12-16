@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Role\UpdateRole;
 use App\Role;
 use App\Jobs\Role\CreateRole;
 use Illuminate\Http\Request;
@@ -73,7 +74,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view('/layouts/settings/role/role_edit')->with('role', $role);
     }
 
     /**
@@ -85,7 +87,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        try
+        {
+            $this->dispatch(new UpdateRole($request, $role));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
     }
 
     /**

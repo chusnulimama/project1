@@ -15,6 +15,7 @@ Route::get('/login', [
     'as'    => 'login',
     'uses'  => 'Auth\AuthController@login'
 ]);
+Route::get('/logout', 'Auth\AuthController@logout');
 
 Route::get('/home', 'HomeController@index');
 //book control
@@ -68,7 +69,7 @@ Route::get('/role/edit/{id}', 'RoleController@edit');
 Route::post('role/update/{id}', [
     'as'    => 'role.update',
     'uses'  => 'RoleController@update']);
-Route::get('/role/destroy/{id}', 'RoleController@destroy');
+Route::post('/role/destroy/{id}', 'RoleController@destroy');
 
 //user control
 Route::get('/user', [

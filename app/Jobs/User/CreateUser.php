@@ -33,8 +33,9 @@ class CreateUser extends Job implements SelfHandling
     public function handle(Dispatcher $event)
     {
         $user = User::create($this->inputs['user']);
+        $detail = $this->inputs['detail'];
+        $detail['user_id']= $user->id;
         $user_detail = UserDetail::create($detail);
-
 
         $event->fire(new WasCreated($user, $user_detail));
     }
@@ -42,7 +43,6 @@ class CreateUser extends Job implements SelfHandling
     protected function sanitize()
     {
         $detail = $this->request->input('detail');
-        $detail['user_id'] = $user->id;
 
         $inputs['user']     = $this->request->input('user');
         $inputs['detail']   = $detail;

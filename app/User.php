@@ -36,4 +36,10 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function detail()
+    {
+        // menunjukkan bahwa user ini punya relasi ke UserDetail model, dengan foreign key `user_id` dan primary key (di user model) `id`
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
+    }
 }

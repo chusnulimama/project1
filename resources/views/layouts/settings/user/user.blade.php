@@ -19,6 +19,7 @@
                         <th>ID</th>
                         <th>Username</th>
                         <th>Nama</th>
+                        <th>E-mail</th>
                         <th>Alamat</th>
                         <th>Kota</th>
                         <th>Telepon</th>
@@ -28,28 +29,34 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @forelse($users as $user)
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->username}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->address}}</td>
-                            <td>{{$user->city}}</td>
-                            <td>{{$user->phone}}</td>
-                            <td>{{$user->fax}}</td>
-                            <td>{{$user->note}}</td>
+                            <td>{{$user->detail->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->detail->address}}</td>
+                            <td>{{$user->detail->city}}</td>
+                            <td>{{$user->detail->phone}}</td>
+                            <td>{{$user->detail->fax}}</td>
+                            <td>{{$user->detail->note}}</td>
                             <td class="centered">
                                 <a href="{{ url('/user/edit/'.$user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                 <a href="{{url('/user/destroy/'.$user->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 <form action="" id="formDelete" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                 </form>
             </div>
+            {!! $users->render() !!}
         </div>
     </div>
 @endsection

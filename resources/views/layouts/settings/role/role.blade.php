@@ -53,6 +53,8 @@
 
                     var form = $('#formDelete');
 
+                    form.attr('action', $(this).attr('href'));
+
                     form.submit();
                 });
         });

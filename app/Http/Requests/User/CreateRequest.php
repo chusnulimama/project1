@@ -25,9 +25,9 @@ class CreateRequest extends Request
     public function rules()
     {
         return [
-            'user.username'     => 'required',
+            'user.username'     => 'required|unique:users,username',
             'detail.name'        => 'required',
-            'user.email'        => 'required',
+            'user.email'        => 'required|unique:users,email',
             'user.password'     => 'required',
         ];
     }

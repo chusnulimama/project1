@@ -6,7 +6,7 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <h4 class="mb">Input Data Role</h4>
+                <h4 class="mb">Menambahkan Data Role</h4>
 
                 <form action="{{url('/role/create')}}" method="post" class="form-horizontal style-form">
                     <div class="form-group {{$errors->has('role') ? 'has-error' : ''}}">

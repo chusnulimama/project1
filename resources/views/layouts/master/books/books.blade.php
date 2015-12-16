@@ -16,7 +16,7 @@
                     <hr>
                     <thead>
                     <tr>
-                        <th>>ISBN</th>
+                        <th>ISBN</th>
                         <th>Judul Buku</th>
                         <th>Penulis</th>
                         <th>Penerbit</th>
@@ -71,7 +71,7 @@
                 //ambil form delete
                 var form = $("#formDelete");
 
-                //ganti form action attributedengan a href attribute
+                //ganti form action attribute dengan a href attribute
                 form.attr('action', $(this).attr('href'));
 
                 //submit form

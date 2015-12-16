@@ -20,11 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $users = [
-            'users' => $users
-        ];
-        return view('layouts/settings/user/user', $users);
+        $query = User::query();
+        $data = [];
+        $data['users'] = $query->orderBy('id', 'asc')->paginate(5);
+        return view('layouts/settings/user/user', $data);
     }
 
     /**
