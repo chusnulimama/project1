@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $role = Role::all();
+        $role = Role::lists('name');
         return view('layouts/settings/user/user_add')->with('role', $role);
     }
 
