@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\User\CreateUser;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -33,7 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('layouts/settings/user/user_add');
+        $role = Role::lists('name');
+        return view('layouts/settings/user/user_add')->with('role', $role);
     }
 
     /**

@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Nama Jabatan</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="role[name]" value="{{$role->name}}" disabled>
+                            <input type="text" class="form-control" name="role[name]" value="{{$role->name}}">
                         </div>
                     </div>
                     <div class="form-group">

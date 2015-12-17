@@ -6,9 +6,9 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <h4 class="mb">Input Akun Pengguna</h4>
+                <h4 class="mb">Menambah Akun Pengguna</h4>
 
-                <form action="{{url('/user/create')}}" method="POST" class="form-horizontal style-form">
+                <form action="{{url('/user/create')}}" method="POST" class="form-horizontal style-form" >
                     <div class="form-group {{$errors->has('user.username') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-5">
@@ -64,7 +64,14 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[note]" value="{{old('detail.note')}}">
+                            {{--<input type="text" class="form-control" name="detail[note]" value="{{old('detail.note')}}">--}}
+                            <select name="detail[note]">
+                                @foreach($role as $roles)
+                                <option value="">Pilih Jenis Role</option>
+                                <option value="{{$roles->name}}"></option>
+                                @endforeach
+                            </select>
+
                         </div>
                     </div>
                     {{--<div class="form-group">--}}

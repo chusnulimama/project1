@@ -42,4 +42,11 @@ class User extends Model implements AuthenticatableContract,
         // menunjukkan bahwa user ini punya relasi ke UserDetail model, dengan foreign key `user_id` dan primary key (di user model) `id`
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
+
+
+    public function roles()
+    {
+        //untuk pivot tabel mengetahui user sebagai status apa
+        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
+    }
 }

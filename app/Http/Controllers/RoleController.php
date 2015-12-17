@@ -94,6 +94,7 @@ class RoleController extends Controller
         } catch(\Exception $msgerror){
             dd($msgerror->getMessage());
         }
+        return redirect()->route('role');
     }
 
     /**

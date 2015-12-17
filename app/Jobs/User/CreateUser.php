@@ -19,10 +19,11 @@ class CreateUser extends Job implements SelfHandling
      */
     protected $request;
     protected $inputs;
+
     public function __construct(Request $request)
     {
-        $this->request  = $request;
-        $this->inputs   = $this->sanitize();
+        $this->request = $request;
+        $this->inputs = $this->sanitize();
     }
 
     /**
@@ -34,7 +35,7 @@ class CreateUser extends Job implements SelfHandling
     {
         $user = User::create($this->inputs['user']);
         $detail = $this->inputs['detail'];
-        $detail['user_id']= $user->id;
+        $detail['user_id'] = $user->id;
         $user_detail = UserDetail::create($detail);
 
         $event->fire(new WasCreated($user, $user_detail));
@@ -44,9 +45,9 @@ class CreateUser extends Job implements SelfHandling
     {
         $detail = $this->request->input('detail');
 
-        $inputs['user']     = $this->request->input('user');
-        $inputs['detail']   = $detail;
+        $inputs['user'] = $this->request->input('user');
+        $inputs['detail'] = $detail;
 
-    return $inputs;
+        return $inputs;
     }
 }
