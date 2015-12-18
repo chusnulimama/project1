@@ -38,8 +38,8 @@ class CreateUser extends Job implements SelfHandling
         $detail['user_id'] = $user->id;
         $user_detail = UserDetail::create($detail);
 
-//        $user->roles()->sync($this->request->input('roles', [5]));
-        $user->roles()->attach($role->id);
+        $user->roles()->sync($this->request->input('roles', [5]));
+//        $user->roles()->attach($role->id);
 
 
         $event->fire(new WasCreated($user, $user_detail));
