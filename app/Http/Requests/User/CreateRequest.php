@@ -29,6 +29,7 @@ class CreateRequest extends Request
             'detail.name'        => 'required',
             'user.email'        => 'required|unique:users,email',
             'user.password'     => 'required',
+//            'detail.note'       => 'required',
         ];
     }
 }

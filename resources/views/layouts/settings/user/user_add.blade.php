@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">No.Telepon</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" name="detail[phone]" value="{{old('detail.phone')}}">
                         </div>
                     </div>
@@ -64,14 +64,12 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-3">
-                            {{--<input type="text" class="form-control" name="detail[note]" value="{{old('detail.note')}}">--}}
-                            <select name="detail[note]">
-                                @foreach($role as $roles)
+                            <select name="role[]" class="form-control">
                                 <option value="">Pilih Jenis Role</option>
-                                <option value="{{$roles->name}}"></option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
                                 @endforeach
                             </select>
-
                         </div>
                     </div>
                     {{--<div class="form-group">--}}

@@ -33,13 +33,13 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->username}}</td>
-                            <td>{{$user->detail->name}}</td>
+                            <td>{{ (is_object($user->detail)) ? $user->detail->name : '' }}</td>]
                             <td>{{$user->email}}</td>
-                            <td>{{$user->detail->address}}</td>
-                            <td>{{$user->detail->city}}</td>
-                            <td>{{$user->detail->phone}}</td>
-                            <td>{{$user->detail->fax}}</td>
-                            <td>{{$user->detail->note}}</td>
+                            <td>{{ (is_object($user->detail)) ? $user->detail->address : '' }}</td>
+                            <td>{{ (is_object($user->detail)) ? $user->detail->city : '' }}</td>
+                            <td>{{ ( is_object($user->detail)) ? $user->detail->phone : '' }}</td>
+                            <td>{{ (is_object($user->detail)) ? $user->detail->fax : '' }}</td>
+                            <td>{{ (is_object($user->detail)) ? $user->detail->note : '' }}</td>
                             <td class="centered">
                                 <a href="{{ url('/user/edit/'.$user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                 <a href="{{url('/user/destroy/'.$user->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
