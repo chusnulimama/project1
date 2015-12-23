@@ -43,10 +43,57 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
 
-
     public function roles()
     {
         //untuk pivot tabel mengetahui user sebagai status apa
         return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
+
+    public function getDetailNameAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->name : '';
+    }
+
+    public function getDetailAddressAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->address : '';
+    }
+
+    public function getDetailCityAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->city : '';
+    }
+
+    public function getDetailPhoneAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->phone : '';
+    }
+
+    public function getDetailFaxAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->fax : '';
+    }
+
+    public function getDetailNoteAttribute()
+    {
+        return (is_object($this->detail)) ? $this->detail->note : '';
+    }
+
+    public function getRoleAttribute()
+    {
+        $role = [];
+
+        foreach ($this->roles as $_role)
+        {
+            $role[] = $_role->name;
+        }
+
+        return implode(', ', $role);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }

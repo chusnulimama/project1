@@ -13,6 +13,7 @@ class CreateUserDetailsTable extends Migration
     public function up()
     {
         Schema::create('user_details', function(Blueprint $table){
+            $table->engine="InnoDB";
             $table->unsignedInteger('user_id');
             $table->increments('id');
             $table->string('name');
@@ -34,6 +35,6 @@ class CreateUserDetailsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_details');
     }
 }

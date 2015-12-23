@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\User\CreateUser;
+use App\Jobs\User\DeleteUser;
+use App\Jobs\User\DetachUserFromRole;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -73,9 +75,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $data = [];
+        $data['roles'] = Role::all();
+        return view('layouts/settings/user/user_edit', $user, $data);
     }
 
     /**
@@ -96,8 +100,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->dispatch(new DeleteUser($user));
+
+        return redirect()->route('user');
     }
 }

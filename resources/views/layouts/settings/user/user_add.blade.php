@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-3">
-                            <select name="role[]" class="form-control">
+                            <select name="roles[]" class="form-control">
                                 <option value="">Pilih Jenis Role</option>
                                 @foreach($roles as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>

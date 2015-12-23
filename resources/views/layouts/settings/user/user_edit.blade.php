@@ -8,67 +8,70 @@
             <div class="form-panel">
                 <h4 class="mb">Mengubah Akun Pengguna</h4>
 
-                <form action="{{ route('user.update', $user->id) }}" method="POST" class="form-horizontal style-form">
-                    <div class="form-group">
+                <form action="{{url('user/update'.$user->id)}}" method="POST" class="form-horizontal style-form" >
+                    <div class="form-group {{$errors->has('user.username') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="user[username]" value="{{$user->username}}">
+                            <input type="text" class="form-control" name="user[username]" value="{{old('user.username, $user->username')}}">
+                            {!! $errors->first('user.username', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('detil.name') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Nama Lengkap</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[name]" value="{{$detail->name}}">
+                            <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name, $detail->name')}}">
+                            {!! $errors->first('detail.name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('user.email') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-5">
-                            <input type="email" class="form-control" name="user[email]" value="{{$user->email}}">
+                            <input type="email" class="form-control" name="user[email]" value="{{old('user.email, $user->email')}}">
+                            {!! $errors->first('user.email', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('user.password') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-5">
-                            <input type="password" class="form-control" name="user[password]" value="{{$user->password}}">
+                            <input type="password" class="form-control" name="user[password]" value="{{old('user.password, $user->password')}}">
+                            {!! $errors->first('user.password', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Alamat</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[address]" value="{{$detail->address}}">
+                            <input type="text" class="form-control" name="detail[address]" value="{{old('detail.address, $detail->address')}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Kota</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[city]" value="{{$detail->city}}">
+                            <input type="text" class="form-control" name="detail[city]" value="{{old('detail.city, $detail->city')}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">No.Telepon</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[phone]" value="{{$detail->phone}}">
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="detail[phone]" value="{{old('detail.phone, $detail->phone')}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">No.Fax</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[fax]" value="{{$detail->fax}}">
+                            <input type="text" class="form-control" name="detail[fax]" value="{{old('detail.fax, $detail->fax')}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Keterangan</label>
+                        <label for="" class="col-sm-2 control-label">Role</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[note]" value="{{$detail->note}}">
+                            <select name="roles[]" class="form-control">
+                                <option value="">Pilih Jenis Role</option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                    {{--<label for="" class="col-sm-2 control-label">Cover</label>--}}
-                    {{--<div class="col-sm-5">--}}
-                    {{--<input type="file" name="book[cover]" value="{{old('book.cover')}}">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
 
                     <div class="form-group">
                         <div class="col-sm-2">

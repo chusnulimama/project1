@@ -14,7 +14,7 @@ class CreateRoleUsersTable extends Migration
     {
         Schema::create('role_users', function(Blueprint $table){
             $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('role_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -29,6 +29,6 @@ class CreateRoleUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('role_users');
     }
 }

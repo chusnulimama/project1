@@ -24,7 +24,7 @@
                         <th>Kota</th>
                         <th>Telepon</th>
                         <th>No.Fax</th>
-                        <th>Keterangan</th>
+                        <th>Role</th>
                         <th class="centered">Aksi</th>
                     </tr>
                     </thead>
@@ -33,13 +33,13 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>{{$user->username}}</td>
-                            <td>{{ (is_object($user->detail)) ? $user->detail->name : '' }}</td>]
+                            <td>{{$user->detail_name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{ (is_object($user->detail)) ? $user->detail->address : '' }}</td>
-                            <td>{{ (is_object($user->detail)) ? $user->detail->city : '' }}</td>
-                            <td>{{ ( is_object($user->detail)) ? $user->detail->phone : '' }}</td>
-                            <td>{{ (is_object($user->detail)) ? $user->detail->fax : '' }}</td>
-                            <td>{{ (is_object($user->detail)) ? $user->detail->note : '' }}</td>
+                            <td>{{$user->detail_addres}}</td>
+                            <td>{{$user->detail_city}}</td>
+                            <td>{{$user->detail_phone}}</td>
+                            <td>{{$user->detail_fax}}</td>
+                            <td>{{$user->role}}</td>
                             <td class="centered">
                                 <a href="{{ url('/user/edit/'.$user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                 <a href="{{url('/user/destroy/'.$user->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
@@ -69,6 +69,8 @@
                 e.preventDefault();
 
                 var form = $('#formDelete');
+
+                form.attr('action', $(this).attr('href'));
 
                 form.submit();
             });

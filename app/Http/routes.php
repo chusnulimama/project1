@@ -77,11 +77,12 @@ Route::get('/user', [
     'uses'  => 'UserController@index']);
 Route::get('/user/create', 'UserController@create');
 Route::post('/user/create', 'UserController@store');
-Route::get('/user/edit/{id}', 'UserController@edit');
-Route::post('user/update/{id}', [
+Route::get('/user/edit/{user_id}', 'UserController@edit');
+Route::post('user/update/{user_id}', [
     'as'    => 'user.update',
     'uses'  => 'UserController@update']);
-Route::get('/user/destroy/{id}', 'UserController@destroy');
+Route::post('/user/destroy/{user_id}', 'UserController@destroy');
+Route::model('user_id', \App\User::class);
 
 //------------------------
 

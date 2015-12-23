@@ -4,6 +4,7 @@ namespace App\Jobs\User;
 
 use App\Events\User\WasCreated;
 use App\Jobs\Job;
+use App\Role;
 use App\User;
 use App\UserDetail;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -38,9 +39,19 @@ class CreateUser extends Job implements SelfHandling
         $detail['user_id'] = $user->id;
         $user_detail = UserDetail::create($detail);
 
-        $user->roles()->sync($this->request->input('roles', [5]));
-//        $user->roles()->attach($role->id);
+        //set default role
+        $role = Role::firstOrCreate([
+            'name' => 'Guest'
+        ]);
 
+        $roles = $this->request->input('roles', []);
+
+         //menghilangkan rolenya untuk mendapatkan nilai string null
+        $key = array_search('0', $roles);
+        if ($key !== null) unset($roles[$key]);
+
+        $roles = (count($roles) < 1) ? [ $role->id ] : $roles;
+        $user->roles()->sync($roles);
 
         $event->fire(new WasCreated($user, $user_detail));
     }
