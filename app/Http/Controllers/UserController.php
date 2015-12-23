@@ -77,9 +77,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $data = [];
-        $data['roles'] = Role::all();
-        return view('layouts/settings/user/user_edit', $user, $data);
+        $data = [
+            'user' => $user,
+            'role' => Role::all()
+        ];
+        return view('layouts/settings/user/user_edit', $data);
     }
 
     /**
