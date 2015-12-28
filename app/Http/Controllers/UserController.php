@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\User\CreateUser;
 use App\Jobs\User\DeleteUser;
 use App\Jobs\User\DetachUserFromRole;
+use App\Jobs\User\UpdateUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class UserController extends Controller
         $query = User::query();
         $data = [];
         $data['users'] = $query->orderBy('id', 'asc')->paginate(5);
-        return view('layouts/settings/user/user', $data);
+        return view('layouts.settings.user.user', $data);
     }
 
     /**
@@ -39,7 +40,7 @@ class UserController extends Controller
         $data = [];
         $data['roles']=Role::all();
 //        $roles = Role::lists('name', 'id');
-        return view('layouts/settings/user/user_add', $data);
+        return view('layouts.settings.user.user_add', $data);
     }
 
     /**
@@ -77,11 +78,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $data = [
-            'user' => $user,
-            'role' => Role::all()
-        ];
-        return view('layouts/settings/user/user_edit', $data);
+//        $data = [
+//            'user' => $user,
+//            'roles' => Role::all()
+//        ];
+        $roles = Role::all();
+        return view('layouts.settings.user.user_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -91,9 +93,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try{
+            $this->dispatch(new UpdateUser($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('user');
     }
 
     /**

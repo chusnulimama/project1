@@ -8,57 +8,57 @@
             <div class="form-panel">
                 <h4 class="mb">Mengubah Akun Pengguna</h4>
 
-                <form action="{{url('user/update'.$user->id)}}" method="POST" class="form-horizontal style-form" >
+                <form action="{{url('user/update/'.$user->id)}}" method="POST" class="form-horizontal style-form" >
                     <div class="form-group {{$errors->has('user.username') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="user[username]" value="{{old('user.username, $user->username')}}">
+                            <input type="text" class="form-control" name="user[username]" value="{{old('user.username', $user->username)}}">
                             {!! $errors->first('user.username', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group {{$errors->has('detil.name') ? 'has-error' : ''}}">
+                    <div class="form-group {{$errors->has('detail.name') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Nama Lengkap</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name, $detail->name')}}">
+                            <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name', $user->detail_name)}}">
                             {!! $errors->first('detail.name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group {{$errors->has('user.email') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-5">
-                            <input type="email" class="form-control" name="user[email]" value="{{old('user.email, $user->email')}}">
+                            <input type="email" class="form-control" name="user[email]" value="{{old('user.email', $user->email)}}">
                             {!! $errors->first('user.email', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group {{$errors->has('user.password') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-5">
-                            <input type="password" class="form-control" name="user[password]" value="{{old('user.password, $user->password')}}">
+                            <input type="password" class="form-control" name="user[password]" value="{{old('user.password', $user->password)}}">
                             {!! $errors->first('user.password', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Alamat</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[address]" value="{{old('detail.address, $detail->address')}}">
+                            <input type="text" class="form-control" name="detail[address]" value="{{old('detail.address', $user->detail_address)}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Kota</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="detail[city]" value="{{old('detail.city, $detail->city')}}">
+                            <input type="text" class="form-control" name="detail[city]" value="{{old('detail.city', $user->detail_city)}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">No.Telepon</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[phone]" value="{{old('detail.phone, $detail->phone')}}">
+                            <input type="text" class="form-control" name="detail[phone]" value="{{old('detail.phone', $user->detail_phone)}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">No.Fax</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[fax]" value="{{old('detail.fax, $detail->fax')}}">
+                            <input type="text" class="form-control" name="detail[fax]" value="{{old('detail.fax', $user->detail_fax)}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,7 +67,7 @@
                             <select name="roles[]" class="form-control">
                                 <option value="">Pilih Jenis Role</option>
                                 @foreach($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                    <option value="{{ $role->id }}" {{ array_key_exists($role->id ,$user->roles->keyBy('id')->all() ) ? ' selected' : ''}}>{{ $role->name }} </option>
                                 @endforeach
                             </select>
                         </div>

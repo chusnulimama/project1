@@ -41,7 +41,7 @@
                             <td>{{$user->detail_fax}}</td>
                             <td>{{$user->role}}</td>
                             <td class="centered">
-                                <a href="{{ url('/user/edit/'.$user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/user/edit/'.$user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                 <a href="{{url('/user/destroy/'.$user->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
