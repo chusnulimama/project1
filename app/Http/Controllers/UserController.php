@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Jobs\User\CreateUser;
 use App\Jobs\User\DeleteUser;
-use App\Jobs\User\DetachUserFromRole;
 use App\Jobs\User\UpdateUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use Guzzle\Tests\Plugin\Redirect;
 use App\Http\Requests;
 use App\Http\Requests\User\CreateRequest;
+use App\UserDetail;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller

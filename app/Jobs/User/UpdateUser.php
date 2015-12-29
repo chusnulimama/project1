@@ -42,27 +42,45 @@ class UpdateUser extends Job implements SelfHandling
         $this->updateDetail();
 
         $data   = $this->request->input('roles', []);
-        $role  = $this->roles->update($data);
+        $role   = $this->roles->update($data);
 
-        $this->roles()->sync($role);
+        $this->user->roles()->sync($request->input('roles'));
 
         return $event->fire(new WasUpdated($this->user));
     }
 
     protected function updateUser()
     {
-        $data = $this->request->input('user');
+        $input      = $this->request->input('user');
+        $password   = $input['password'];
+        //helper function untuk remove beberapa key dari array
+        array_forget($input,['password', 'password_confirmation']);
 
-        $user = $this->user->update($data);
+        $user = $this->user->update($input);
 
+        if(empty($password) == false)
+        {
+            $this->user->password = $password;
+            $this->user->save();
+        }
         return $user;
     }
 
     protected function updateDetail()
     {
-        $data = $this->request->input('detail');
+        if($this->user->detail instanceof UserDetail)
+        {
+            $this->user->detail->update($request->input('detail'));
+        } else{
+            //jika user tidak memiliki user detail -> create user detail
+            $detail = $request->input('detail');
 
-        $detail = $this->detail->update($data);
+            //tambah user_id
+            $detail['user_id'] = $this->user->id;
+
+            //create baru
+            UserDetail::create($detail);
+        }
 
         return $detail;
     }
