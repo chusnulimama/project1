@@ -4,7 +4,9 @@ namespace App\Jobs\User;
 
 use App\Events\User\WasUpdated;
 use App\Jobs\Job;
+use App\Role;
 use App\User;
+use App\UserDetail;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
@@ -17,12 +19,16 @@ class UpdateUser extends Job implements SelfHandling
      * @return void
      */
     protected $user;
+    protected $detail;
+    protected $role;
     protected $request;
 
-    public function __construct(User $user, Request $request)
+    public function __construct(User $user, Request $request, UserDetail $detail, Role $role)
     {
         $this->user = $user;
         $this->request = $request;
+        $this->roles = $role;
+        $this->detail = $detail;
     }
 
     /**
@@ -33,12 +39,12 @@ class UpdateUser extends Job implements SelfHandling
     public function handle(Dispatcher $event)
     {
         $this->updateUser();
-//        $this->updateDetail();
+        $this->updateDetail();
 
         $data   = $this->request->input('roles', []);
-        $roles  = $this->roles->update($data);
+        $role  = $this->roles->update($data);
 
-        $this->roles()->sync($roles);
+        $this->roles()->sync($role);
 
         return $event->fire(new WasUpdated($this->user));
     }
