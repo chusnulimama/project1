@@ -96,7 +96,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         try{
-            $this->dispatch(new UpdateUser($request));
+            $this->dispatch(new UpdateUser($user, $request));
         } catch(\Exception $msgerror){
             dd($msgerror->getMessage());
         }
