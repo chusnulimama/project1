@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +18,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+
+        $employees = User::whereHas('roles', function($subQuery) {
+            $subQuery->where('description', 'User');
+        })->paginate(5);
+
+        return view('layouts.master.employee.employee')->with('employees', $employees);
+
     }
 
     /**
@@ -83,5 +91,14 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function modal($id)
+    {
+        $employees = User::find($id);
+
+        if(! $employees instanceof User) abort(404);
+
+        return view('layouts.master.modal.employee', ['employees'=>$employees]);
     }
 }

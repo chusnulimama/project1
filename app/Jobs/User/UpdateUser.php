@@ -19,16 +19,12 @@ class UpdateUser extends Job implements SelfHandling
      * @return void
      */
     protected $user;
-    protected $detail;
-    protected $role;
     protected $request;
 
-    public function __construct(User $user, Request $request, UserDetail $detail, Role $role)
+    public function __construct(User $user, Request $request)
     {
         $this->user = $user;
         $this->request = $request;
-        $this->roles = $role;
-        $this->detail = $detail;
     }
 
     /**
@@ -42,9 +38,9 @@ class UpdateUser extends Job implements SelfHandling
         $this->updateDetail();
 
         $data   = $this->request->input('roles', []);
-        $role   = $this->roles->update($data);
+        $role   = $this->user->update($data);
 
-        $this->user->roles()->sync($request->input('roles'));
+        $this->user->roles()->sync($this->request->input('roles'));
 
         return $event->fire(new WasUpdated($this->user));
     }
@@ -70,10 +66,10 @@ class UpdateUser extends Job implements SelfHandling
     {
         if($this->user->detail instanceof UserDetail)
         {
-            $this->user->detail->update($request->input('detail'));
+            $this->user->detail->update($this->request->input('detail'));
         } else{
             //jika user tidak memiliki user detail -> create user detail
-            $detail = $request->input('detail');
+            $detail = $this->request->input('detail');
 
             //tambah user_id
             $detail['user_id'] = $this->user->id;
@@ -81,7 +77,5 @@ class UpdateUser extends Job implements SelfHandling
             //create baru
             UserDetail::create($detail);
         }
-
-        return $detail;
     }
 }

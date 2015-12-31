@@ -132,7 +132,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        if(! $book instanceof Book) abort(404);
+        if(! $book instanceof Book  ) abort(404);
 
         return view('layouts.master.modal.book', ['book'=> $book]);
     }

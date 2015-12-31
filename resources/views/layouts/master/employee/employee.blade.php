@@ -1,14 +1,18 @@
 @extends('layouts.master')
 @section('content')
 
-    <h3><i class="fa fa-angle-right">Data Master Karyawan</i></h3>
+    <h3><i class="fa fa-angle-right"></i>Data Master Karyawan</h3>
 
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
                 <table class="table table-striped table-advance table-hover">
-                    <h4>Daftar Karyawan</h4>
-                    <h6><a href="{!! URL::to('/employee/create') !!}" class="btn btn-primary btn-xs" role="button"></a></h6>
+                    <h4>Daftar Buku</h4>
+                    @if(Session::has('message'))
+                        {!! Session::get('message') !!}
+                    @endif
+
+                    <h6><a href="{!! URL::to('/employee/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
                     <hr>
                     <thead>
                     <tr>
@@ -20,48 +24,64 @@
                         <th>E-mail</th>
                         <th>Jabatan</th>
                         <th>Status</th>
-                        <th>Note</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="{!! URL::to('/employee#myModal') !!}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
-                            <button class="btn btn-xs btn-primary"><a href="{!! URL::to('/employee/edit') !!}"><i class="fa fa-pencil"></i></a></button>
-                            <button class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
-                        </td>
+                        @foreach($employees as $employee)
+                            <td>nim</td>
+                            <td>{{$employee->detail_name}}</td>
+                            <td>{{$employee->detail_address}}</td>
+                            <td>{{$employee->detail_city}}</td>
+                            <td>{{$employee->detail_phone}}</td>
+                            <td>{{$employee->email}}</td>
+                            <td>{{$employee->roles_name}}</td>
+                            <td>{{$employee->status}}</td>
+                            <td>{{$employee->detail_note}}</td>
+                            <td>
+                                <a href="{{url('/employee/view'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                <a href="{{url('/employee/edit'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/employee/destroy'.$employee->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                            </td>
                     </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                <form action="" id="formDelete" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                </form>
             </div>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modalfade">
+            {!! $employees->render() !!}
+            <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Detail Karyawan</h4>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Nama Karyawan</h5>
-                        <p>Jabatan : ...</p>
-                        <p>Alamat, Kota : ..../....</p>
-                        <p>No. Telepon : ...</p>
-                        <p>E-mail : ...</p>
-                        <p>Note : ...</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{!! URL::to('/employee') !!}" class="btn btn-default" role="button">Close</a>
+                    <div class="modal-content">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @stop
+    @endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //target link delete
+            $('a.btn-delete').on('click',function(e){
+                //block default action ke href
+                e.preventDefault();
+
+                //ambil form delete
+                var form = $("#formDelete");
+
+                //ganti form action atribute dengan a href attribute
+                form.attr('action', $(this).attr('href'));
+
+                //submit form
+                form.submit();
+            });
+        });
+    </script>
+    @endsection

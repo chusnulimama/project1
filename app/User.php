@@ -79,6 +79,16 @@ class User extends Model implements AuthenticatableContract,
         return (is_object($this->detail)) ? $this->detail->note : '';
     }
 
+    public function getRolesNameAttribute()
+    {
+        return (is_object($this->roles[0])) ? $this->roles[0]->name : '';
+    }
+
+    public function getRolesDescriptionAttribute()
+    {
+        return (is_object($this->roles[0])) ? $this->roles[0]->description : '';
+    }
+
     public function getRoleAttribute()
     {
         $role = [];

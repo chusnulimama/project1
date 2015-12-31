@@ -38,14 +38,15 @@ Route::post('/book/destroy/{id}', 'BookController@destroy');
 Route::get('/employee', [
     'as'    => 'employee',
     'uses'  => 'EmployeeController@index']);
-Route::get('/employee/view/{id}', 'EmployeeController@modal');
+Route::get('/employee/view/{user_id}', 'EmployeeController@modal');
 Route::get('/employee/create', 'EmployeeController@create');
 Route::post('/employee/create', 'EmployeeController@store');
-Route::get('/employee/edit/{id}', 'EmployeeController@edit');
+Route::get('/employee/edit/{user_id}', 'EmployeeController@edit');
 Route::post('/employee/update/{id}', [
     'as'    => 'employee.update',
     'uses'  => 'EmployeeController@update']);
-Route::get('/book/destroy/{id}', 'EmployeeController@destroy');
+Route::get('/book/destroy/{user_id}', 'EmployeeController@destroy');
+Route::model('user_id', \App\User::class);
 
 //cust control
 Route::get('/customer', [
