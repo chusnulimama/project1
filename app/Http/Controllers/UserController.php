@@ -37,7 +37,7 @@ class UserController extends Controller
     public function create()
     {
         $data = [];
-        $data['roles']=Role::all();
+        $data['roles'] = Role::all();
 //        $roles = Role::lists('name', 'id');
         return view('layouts.settings.user.user_add', $data);
     }

@@ -101,6 +101,14 @@ class User extends Model implements AuthenticatableContract,
         return implode(', ', $role);
     }
 
+    public function getRoleDescriptionAttribute()
+    {
+       if ($this->roles[0] instanceof Role)
+       {
+           return $this->roles[0]->description;
+       }
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

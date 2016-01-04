@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\User\CreateUser;
+use App\Jobs\User\DeleteUser;
+use App\Jobs\User\UpdateUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -34,7 +37,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::where('description', '=', 'User')->get();
+        return view('layouts.master.employee.employee_add', ['roles' => $roles]);
     }
 
     /**
@@ -43,9 +47,15 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateUser($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('employee');
     }
 
     /**
@@ -65,9 +75,10 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('layouts.masater.employee.employee_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -79,7 +90,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $this->dispatch(new UpdateUser($user, $request));
+        } catch( \Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        redirect()->route('employee');
     }
 
     /**
@@ -90,15 +106,13 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->dispatch(new DeleteUser($user));
+
+        return redirect()->route('employee');
     }
 
-    public function modal($id)
+    public function modal(User $employee)
     {
-        $employees = User::find($id);
-
-        if(! $employees instanceof User) abort(404);
-
-        return view('layouts.master.modal.employee', ['employees'=>$employees]);
+        return view('layouts.master.modal.employee', ['employee'=>$employee]);
     }
 }

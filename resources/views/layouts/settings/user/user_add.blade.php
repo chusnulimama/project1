@@ -16,11 +16,11 @@
                             {!! $errors->first('user.username', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
-                    <div class="form-group {{$errors->has('detil.name') ? 'has-error' : ''}}">
+                    <div class="form-group {{$errors->has('detail.name') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Nama Lengkap</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name')}}">
-                            {!! $errors->first('detil.name', '<p class="help-block">:message</p>') !!}
+                            {!! $errors->first('detail.name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group {{$errors->has('user.email') ? 'has-error' : ''}}">
@@ -56,12 +56,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">No.Fax</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="detail[fax]" value="{{old('detail.fax')}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-3">
                             <select name="roles[]" class="form-control">
@@ -72,12 +66,6 @@
                             </select>
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                    {{--<label for="" class="col-sm-2 control-label">Cover</label>--}}
-                    {{--<div class="col-sm-5">--}}
-                    {{--<input type="file" name="book[cover]" value="{{old('book.cover')}}">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
 
                     <div class="form-group">
                         <div class="col-sm-2">

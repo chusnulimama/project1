@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="content-panel">
                 <table class="table table-striped table-advance table-hover">
-                    <h4>Daftar Buku</h4>
+                    <h4>Daftar Karyawan</h4>
                     @if(Session::has('message'))
                         {!! Session::get('message') !!}
                     @endif
@@ -16,7 +16,7 @@
                     <hr>
                     <thead>
                     <tr>
-                        <th>NIM</th>
+                        <th>NIP</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Kota</th>
@@ -31,7 +31,7 @@
                     <tbody>
                     <tr>
                         @foreach($employees as $employee)
-                            <td>nim</td>
+                            <td>nip</td>
                             <td>{{$employee->detail_name}}</td>
                             <td>{{$employee->detail_address}}</td>
                             <td>{{$employee->detail_city}}</td>
@@ -41,9 +41,9 @@
                             <td>{{$employee->status}}</td>
                             <td>{{$employee->detail_note}}</td>
                             <td>
-                                <a href="{{url('/employee/view'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                                <a href="{{url('/employee/edit'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                <a href="{{url('/employee/destroy'.$employee->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                <a href="{{url('/employee/view/'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                <a href="{{url('/employee/edit/'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/employee/destroy/'.$employee->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                             </td>
                     </tr>
                         @endforeach

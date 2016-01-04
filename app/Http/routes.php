@@ -35,10 +35,10 @@ Route::post('/book/update/{id}', [
 Route::post('/book/destroy/{id}', 'BookController@destroy');
 
 //employee control
+Route::get('/employee/view/{user_id}', 'EmployeeController@modal');
 Route::get('/employee', [
     'as'    => 'employee',
     'uses'  => 'EmployeeController@index']);
-Route::get('/employee/view/{user_id}', 'EmployeeController@modal');
 Route::get('/employee/create', 'EmployeeController@create');
 Route::post('/employee/create', 'EmployeeController@store');
 Route::get('/employee/edit/{user_id}', 'EmployeeController@edit');
