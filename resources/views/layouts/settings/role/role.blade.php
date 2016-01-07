@@ -23,7 +23,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($roles as $role)
+                    @forelse($roles as $role)
                     <tr>
                         <td>{{$role->id}}</td>
                         <td>{{$role->name}}</td>
@@ -33,7 +33,11 @@
                             <a href="{{url('/role/destroy/'.$role->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
-                        @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="12">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 <form action="" id="formDelete" method="POST">

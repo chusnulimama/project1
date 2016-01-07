@@ -13,12 +13,16 @@ class CreateDeleveriesTable extends Migration
     public function up()
     {
         Schema::create('deliveries', function(Blueprint $table){
+            $table->engine="InnoDB";
             $table->increments('id');
-            $table->string('invoice');
-            $table->date('date_trans');
+            $table->unsignedInteger('transaction_id');
+            $table->unsignedInteger('user_id');
             $table->date('date_sent');
             $table->enum('status', ['Accepted', 'Rejected']);
-            $table->string('username');
+            $table->timestamps();
+
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

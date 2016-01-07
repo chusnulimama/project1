@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\User\CreateUser;
+use App\Jobs\User\DeleteUser;
+use App\Jobs\User\UpdateUser;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\User\CreateRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +23,11 @@ class CustController extends Controller
      */
     public function index()
     {
-        $user_details = DB::table('user_details')->paginate(5);
-        $user_details =
-            [
-                'user_details' => $user_details
-            ];
-        return view('/layouts/master/cust/cust', $user_details);
+        $custs = User::whereHas('roles', function($subQuery){
+            $subQuery->where('description', 'Customer');
+        })->paginate(5);
+
+        return view('/layouts/master/cust/cust')->with('custs', $custs);
     }
 
     /**
@@ -30,9 +35,12 @@ class CustController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
-        return view('/layouts/master/cust/cust_add');
+        $roles = Role::where('description', '=', 'Customer')->get();
+        return view('/layouts/master/cust/cust_add', ['roles' => $roles]);
     }
 
     /**
@@ -41,9 +49,15 @@ class CustController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateUser($request));
+        } catch (\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('cust');
     }
 
     /**
@@ -63,9 +77,10 @@ class CustController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('layouts.master.cust.cust_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -75,9 +90,15 @@ class CustController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try{
+            $this->dispatch(new UpdateUser($user, $request));
+        } catch (\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('cust');
     }
 
     /**
@@ -86,8 +107,15 @@ class CustController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->dispatch(new DeleteUser($user));
+
+        return redirect()->route('cust');
+    }
+
+    public function modal(User $cust)
+    {
+        return view('layouts.master.modal.cust', ['cust'=>$cust]);
     }
 }

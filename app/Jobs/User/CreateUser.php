@@ -46,9 +46,11 @@ class CreateUser extends Job implements SelfHandling
 
         $roles = $this->request->input('roles', []);
 
-         //menghilangkan rolenya untuk mendapatkan nilai string null
-        $key = array_search('0', $roles);
-        if ($key !== null) unset($roles[$key]);
+//         menghilangkan rolenya untuk mendapatkan nilai string null
+        foreach($roles as $key => $value)
+        {
+            if(empty($value)) unset($roles[$key]);
+        };
 
         $roles = (count($roles) < 1) ? [ $role->id ] : $roles;
         $user->roles()->sync($roles);

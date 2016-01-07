@@ -23,6 +23,17 @@
                             {!! $errors->first('detail.name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">Jabatan</label>
+                        <div class="col-sm-3">
+                            <select name="roles[]" class="form-control">
+                                <option value="">Pilih Jenis Jabatan</option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group {{$errors->has('user.email') ? 'has-errors' : ''}}">
                         <label for="" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-5">
@@ -35,17 +46,6 @@
                         <div class="col-sm-5">
                             <input type="password" class="form-control" name="user[password]" value="{{old('user.password')}}">
                             {!! $errors->first('user.password', '<p class="help-block">:message</p>') !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Jabatan</label>
-                        <div class="col-sm-3">
-                            <select name="roles[]" class="form-control">
-                                <option value="">Pilih Jenis Jabatan</option>
-                                @foreach($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">

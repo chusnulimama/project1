@@ -16,10 +16,10 @@
                     <span>Data Master</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('/employee')}}">Pegawai</a></li>
                     <li><a href="{{URL::to('/book')}}">Buku</a></li>
-                    <li><a href="{{URL::to('/supp')}}">Pemasok</a></li>
-                    <li><a href="{{URL::to('/pub')}}">Penerbit</a></li>
+                    <li><a href="{{URL::to('/employee')}}">Pegawai</a></li>
+                    <li><a href="{{URL::to('/supplier')}}">Pemasok</a></li>
+                    <li><a href="{{URL::to('/publisher')}}">Penerbit</a></li>
                     <li><a href="{{URL::to('/customer')}}">Pelanggan</a></li>
                 </ul>
             </li>
@@ -30,8 +30,9 @@
                     <span>Transaksi</span>
                 </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/trans/receive')}}">Barang Masuk</a></li>
-                        <li><a href="{{URL::to('/trans/sale')}}">Barang Keluar</a></li>
+                        <li><a href="{{URL::to('/receive')}}">Pembelian Buku</a></li>
+                        <li><a href="{{URL::to('/delivery')}}">Pengiriman Buku</a></li>
+                        <li><a href="{{URL::to('/sale')}}">Penjualan Buku</a></li>
                     </ul>
             </li>
             <li class="sub-menu">

@@ -13,15 +13,17 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function(Blueprint $table){
+            $table->engine="InnoDB";
             $table ->increments('id');
-            $table->string('invoice');
+            $table->unsignedInteger('user_id');
+            $table->string('transaction_id');
             $table->date('date_trans');
-            $table->string('id_trans');
-            $table->string('username');
             $table->integer('total');
-            $table->integer('payment');
-            $table->string('status');
-            $table->string('type');
+            $table->enum('payment', ['Cash','Consolidation', 'Consignment']);
+            $table->enum('type', ['Receive', 'Sale']);
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

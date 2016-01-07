@@ -13,13 +13,17 @@ class CreateTransactionDetailsTable extends Migration
     public function up()
     {
         Schema::create('transaction_details', function(Blueprint $table){
+            $table->engine="InnoDB";
             $table->increments('id');
-            $table->string('invoice');
-            $table->date('date_trans');
-            $table->string('id_trans');
-            $table->string('id_good');
+            $table->unsignedInteger('transaction_id');
+            $table->unsignedInteger('book_id');
             $table->integer('qty');
             $table->integer('price');
+            $table->integer('disc');
+            $table->timestamps();
+
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 

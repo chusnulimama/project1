@@ -12,11 +12,12 @@
                         {!! Session::get('message') !!}
                     @endif
 
+
                     <h6><a href="{{url('/user/create')}}" class="btn btn-primary btn-xs">Tambah</a></h6>
                     <hr>
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Username</th>
                         <th>Nama</th>
                         <th>E-mail</th>
@@ -29,13 +30,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($users as $user)
+                    {{--*/$perPage = $users->perPage(5);/*--}}
+                    {{--*/$currentPage = $users->currentPage(1);/*--}}
+                    {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
+                    @forelse($users as $key => $user)
+                        {{--*/$number = $startNumber + ($key + 1);/*--}}
                         <tr>
-                            <td>{{$user->id}}</td>
+                            <td>{{$number}}</td>
                             <td>{{$user->username}}</td>
                             <td>{{$user->detail_name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->detail_addres}}</td>
+                            <td>{{$user->detail_address}}</td>
                             <td>{{$user->detail_city}}</td>
                             <td>{{$user->detail_phone}}</td>
                             <td>{{$user->detail_fax}}</td>
@@ -47,7 +52,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">Tidak ada data</td>
+                            <td colspan="12">Tidak ada data</td>
                         </tr>
                     @endforelse
                     </tbody>

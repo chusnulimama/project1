@@ -16,7 +16,7 @@
                     <hr>
                     <thead>
                     <tr>
-                        <th>NIP</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Kota</th>
@@ -30,8 +30,12 @@
                     </thead>
                     <tbody>
                     <tr>
-                        @foreach($employees as $employee)
-                            <td>nip</td>
+                        {{--*/$perPage = $employees->perPage(5);/*--}}
+                        {{--*/$currentPage = $employees->currentPage(1);/*--}}
+                        {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
+                        @forelse($employees as $key => $employee)
+                            {{--*/$number = $startNumber + ($key + 1);/*--}}
+                            <td>{{$number}}</td>
                             <td>{{$employee->detail_name}}</td>
                             <td>{{$employee->detail_address}}</td>
                             <td>{{$employee->detail_city}}</td>
@@ -43,10 +47,14 @@
                             <td>
                                 <a href="{{url('/employee/view/'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
                                 <a href="{{url('/employee/edit/'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                <a href="{{url('/employee/destroy/'.$employee->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                <a href="{{url('/employee/destroy/'.$employee->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                             </td>
                     </tr>
-                        @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="12">Tidak ada data</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <form action="" id="formDelete" method="POST">

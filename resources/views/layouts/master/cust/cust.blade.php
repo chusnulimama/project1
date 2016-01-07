@@ -16,40 +16,51 @@
                     <hr>
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
+                        <th>Member</th>
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Kota</th>
                         <th>No. Telepon</th>
+                        <th>No. Fax</th>
                         <th>E-mail</th>
                         <th>Note</th>
                         <th width="146">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($user_details as $user_detail)
+                    {{--$no = 1;--}}
+                        @forelse($custs as $cust)
                             <tr>
-                                <td>{{$user_detail->id}}</td>
-                                <td>{{$user_detail->name}}</td>
-                                <td>{{$user_detail->address}}</td>
-                                <td>{{$user_detail->city}}</td>
-                                <td>{{$user_detail->phone}}</td>
-                                <td>{{$user_detail->email}}</td>
-                                <td>{{$user_detail->note}}</td>
+                                <td>$no. ""</td>
+                                <td>No.Member</td>
+                                <td>{{$cust->detail_name}}</td>
+                                <td>{{$cust->detail_address}}</td>
+                                <td>{{$cust->detail_city}}</td>
+                                <td>{{$cust->detail_phone}}</td>
+                                <td>{{$cust->detail_fax}}</td>
+                                <td>{{$cust->email}}</td>
+                                <td>{{$cust->detail_note}}</td>
                                 <td>
-                                    <a href="{{url('/customer/view/'.$user_detail->id)}}" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                                    <a href="{{url('/customer/edit'.$user_detail->id)}}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <a href="{{url('/customer/destroy/'.$user_detail->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                                    <a href="{{url('/customer/view/'.$cust->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                    <a href="{{url('/customer/edit/'.$cust->id)}}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{url('/customer/destroy/'.$cust->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="12">Tidak ada data</td>
+                                </tr>
+                            @endforelse
+                    {{--$no++;--}}
                     </tbody>
                 </table>
                 <form action="" id="formDelete" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}" >
                 </form>
             </div>
-            <div aria-hidden="true" tabindex="-1" id="myModal" class="modal fade">
+            {!! $custs->render() !!}
+            <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     </div>
@@ -72,7 +83,7 @@
                 var form = $("#formDelete");
 
                 //ganti form action attribute dengan href attribute
-                firm.attr('action'.$(this).attr('href'));
+                form.attr('action', $(this).attr('href'));
 
                 //form submit
                 form.submit();

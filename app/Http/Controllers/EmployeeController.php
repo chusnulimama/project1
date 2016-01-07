@@ -26,7 +26,7 @@ class EmployeeController extends Controller
             $subQuery->where('description', 'User');
         })->paginate(5);
 
-        return view('layouts.master.employee.employee')->with('employees', $employees);
+        return view('layouts.master.employee.employee', ['employees' => $employees]);
 
     }
 
@@ -78,7 +78,7 @@ class EmployeeController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('layouts.masater.employee.employee_edit')->with('roles', $roles)->with('user', $user);
+        return view('layouts.master.employee.employee_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -88,14 +88,14 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         try{
             $this->dispatch(new UpdateUser($user, $request));
         } catch( \Exception $msgerror){
             dd($msgerror->getMessage());
         }
-        redirect()->route('employee');
+        return redirect()->route('employee');
     }
 
     /**
@@ -104,7 +104,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         $this->dispatch(new DeleteUser($user));
 

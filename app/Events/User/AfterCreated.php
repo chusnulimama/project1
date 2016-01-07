@@ -3,12 +3,10 @@
 namespace App\Events\User;
 
 use App\Events\Event;
-use App\User;
-use App\UserDetail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class WasCreated extends Event
+class AfterCreated extends Event
 {
     use SerializesModels;
 
@@ -17,13 +15,12 @@ class WasCreated extends Event
      *
      * @return void
      */
-    public $user;
 
+    public $user;
     public function __construct(User $user)
     {
-        $this->user     = $user;
+        $this->user = $user;
     }
-
 
     /**
      * Get the channels the event should be broadcast on.

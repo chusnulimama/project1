@@ -56,6 +56,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">No.Fax</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="detail[fax]" value="{{old('detail.fax')}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-3">
                             <select name="roles[]" class="form-control">

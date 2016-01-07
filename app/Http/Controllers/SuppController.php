@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\User\CreateUser;
+use App\Jobs\User\DeleteUser;
+use App\Jobs\User\UpdateUser;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\User\CreateRequest;
 use App\Http\Controllers\Controller;
 
 class SuppController extends Controller
@@ -16,7 +22,11 @@ class SuppController extends Controller
      */
     public function index()
     {
-        //
+        $suppliers = User::whereHas('roles', function($subQuery){
+            $subQuery->where('description', 'Supplier');
+        })->paginate(5);
+
+        return view('layouts/master/supp/supplier')->with('suppliers', $suppliers);
     }
 
     /**
@@ -26,7 +36,9 @@ class SuppController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::where('description', '=', 'Supplier')->get();
+
+        return view('layouts/master/supp/supp_add', ['roles' => $roles]);
     }
 
     /**
@@ -35,9 +47,15 @@ class SuppController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateUser($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('supp');
     }
 
     /**
@@ -57,9 +75,10 @@ class SuppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('/layouts/master/supp/supp_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -69,9 +88,15 @@ class SuppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try{
+            $this->dispatch(new UpdateUser($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('supp');
     }
 
     /**
@@ -80,8 +105,19 @@ class SuppController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try{
+            $this->dispatch(new DeleteUser($user));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('supp');
+    }
+
+    public function modal(User $supplier)
+    {
+        return view('layouts.master.modal.supp', ['supplier' => $supplier]);
     }
 }

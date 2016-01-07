@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($books as $book)
+                    @forelse($books as $book)
                         <tr>
                             <td>{{$book->ISBN}}</td>
                             <td>{{$book->name}}</td>
@@ -42,7 +42,11 @@
                                 <a href="{{url('/book/destroy/'.$book->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="12">Tidak ada data</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <form action="" id="formDelete" method="POST">

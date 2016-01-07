@@ -1,62 +1,93 @@
 @extends('layouts.master')
 @section('content')
 
-    <h3><i class="fa fa-angle-right">Data Master Pemasok</i></h3>
+    <h3><i class="fa fa-angle-right"></i>Data Master Pemasok</h3>
+
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
                 <table class="table table-striped table-advance table-hover">
-                    <h4><i class="fa fa-angle-right"></i>Daftar Pemasok</h4>
+                    <h4>Daftar Pemasok</h4>
+                    @if(Session::has('message'))
+                        {!! Session::get('message') !!}
+                    @endif
+
+                    <h6><a href="{!! URL::to('/supplier/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
                     <hr>
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Pemasok</th>
+                        <th>ID Pemasok</th>
+                        <th>Nama</th>
                         <th>Alamat</th>
                         <th>Kota</th>
                         <th>No.Telepon</th>
-                        <th>E-mail</th>
                         <th>No.Fax</th>
-                        <th>Note</th>
+                        <th>E-mail</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-success btn-xs"><i class="fa fa-th-list"></i></button>
-                        <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
-                    </td>
+                    <tr>
+                        @forelse($suppliers as $supplier)
+                            <td>no</td>
+                            <td>id_pemasok</td>
+                            <td>{{$supplier->detail_name}}</td>
+                            <td>{{$supplier->detail_address}}</td>
+                            <td>{{$supplier->detail_city}}</td>
+                            <td>{{$supplier->detail_phone}}</td>
+                            <td>{{$supplier->detail_fax}}</td>
+                            <td>{{$supplier->email}}</td>
+                            <td>{{$supplier->detail_status}}</td>
+                            <td>{{$supplier->detail_note}}</td>
+                            <td>
+                                <a href="{{url('/supplier/view/'.$supplier->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                <a href="{{url('/supplier/edit/'.$supplier->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/supplier/destroy/'.$supplier->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="12">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
+                <form action="" id="formDelete" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                </form>
             </div>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modalfade">
+            {!! $suppliers->render() !!}
+            <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Detail Pemasok</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h5>Nama Pemasok : ...</h5>
-                            <p>Alamat, Kota : .../...</p>
-                            <p>No Telepon/Fax : .../...</p>
-                            <p>E-mail : ...</p>
-                            <p>Note : ...</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{!! URL::to('/supp') !!}" class="btn btn-default" role="button">Close</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@stop
+@endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //target link delete
+            $('a.btn-delete').on('click',function(e){
+                //block default action ke href
+                e.preventDefault();
+
+                //ambil form delete
+                var form = $("#formDelete");
+
+                //ganti form action atribute dengan a href attribute
+                form.attr('action', $(this).attr('href'));
+
+                //submit form
+                form.submit();
+            });
+        });
+    </script>
+@endsection
