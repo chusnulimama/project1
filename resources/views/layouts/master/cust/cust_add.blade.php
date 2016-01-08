@@ -6,7 +6,7 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
-                <h4 class="mb">Input Data Pelanggan</h4>
+                <h4 class="mb">Ubah Data Pelanggan</h4>
 
                 <form class="form-horizontal style-form" action="{{url('/customer/create')}}" method="post">
                     <div class="form-group">
@@ -14,7 +14,7 @@
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="user[username]" value="{{old('user.username')}}">
                             <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="5">
+                            <input type="hidden" class="form-control" name="roles[]" value="id_Customer">
                         </div>
                     </div>
                     <div class="form-group">

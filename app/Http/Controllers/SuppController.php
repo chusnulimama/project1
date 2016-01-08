@@ -38,7 +38,7 @@ class SuppController extends Controller
     {
         $roles = Role::where('description', '=', 'Supplier')->get();
 
-        return view('layouts/master/supp/supp_add', ['roles' => $roles]);
+        return view('layouts/master/supp/supplier_add', ['roles' => $roles]);
     }
 
     /**

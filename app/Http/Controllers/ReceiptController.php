@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
@@ -30,8 +31,11 @@ class ReceiptController extends Controller
      */
     public function create()
     {
-        $supp = User::where('description', '=', 'Supplier');
-        return view('layouts.transaction.receipts.receive_add')->with('@supp', $supp);
+        $supps = User::whereHas('roles', function($query){
+            $query->where('description', 'Supplier');
+        })->get();
+        $books = Book::all();
+        return view('layouts.transaction.receipts.receive_add')->with('supps', $supps)->with('books', $books);
     }
 
     /**
