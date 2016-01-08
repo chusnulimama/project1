@@ -112,7 +112,6 @@
             });
 
             $('.input-qty').on('change', function() {
-                var subTotal = 0;
                 var tr = $(this).closest('tr');
                 var price = $('.book_price', $(tr)).html();
                 var discount = $('.input-discount').val();
@@ -121,7 +120,7 @@
                     price = price - (price * (discount/100));
                 }
 
-                subTotal = price * $(this).val();
+                var subTotal = price * $(this).val();
 
                 $('.sub_total', $(tr)).html(subTotal);
                 calculateTotal();
