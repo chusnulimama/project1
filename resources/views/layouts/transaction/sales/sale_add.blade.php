@@ -34,45 +34,39 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label"><h4>Buku</h4></label>
                         <div class="col-sm-3">
-                            <select name="" class="form-control">
+                            <select id="BookSelection" class="form-control">
                                 <option value="">Pilih Buku</option>
-                                <option value=""></option>
+                                @foreach ($books as $book)
+                                <option value="{{ $book->id }}">{{ $book->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div>
-                            <button class="btn-default btn-sm">Tambah Daftar</button>
-                            <button class="btn-default btn-sm">Hapus Daftar</button>
+                            <button class="btn-default btn-sm btn-add-book">Tambah Buku</button>
                         </div>
                     </div>
 
-                    <table class="table table-striped table-advance table-hover">
+                    <table class="table table-striped table-advance table-hover" id="transactionDetails">
                         <hr>
                         <thead>
                         <tr class="heading">
-                            <th>#</th>
                             <th>Judul Buku</th>
                             <th>Penerbit</th>
                             <th>Kuantitas</th>
                             <th>Harga Satuan</th>
                             <th>Diskon</th>
                             <th>SubTotal</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right"></td>
-                        </tr>
-                        <tr id="total">
-                            <td colspan="5" style="text-align: right">TOTAL</td>
-                            <td><input type="text" class="span3" style="text-align: right" readonly></td>
-                        </tr>
                         </tbody>
+                        <tfoot>
+                            <tr id="total">
+                                <td colspan="5" style="text-align: right">TOTAL</td>
+                                <td><input name='grandTotal' type="text" class="span3" style="text-align: right" readonly></td>
+                            </tr>
+                        </tfoot>
                     </table>
                     <div class="form-group">
                         <div class="col-sm-5">
@@ -85,4 +79,69 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.btn-add-book').on('click', function() {
+                var bookSelector = $('#BookSelection');
+
+                if ($(bookSelector).val() == null || $(bookSelector).val() == '')
+                {
+                    alert('Pilih Buku terlebih dahulu!');
+                } else {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/book/sale-add/' + $(bookSelector).val(),
+                        success: function(response)
+                        {
+                            $('table#transactionDetails tbody').append(response);
+                            calculateTotal();
+                        }
+                    });
+                }
+            });
+
+            $('table#transactionDetails tbody .btn-delete').on('click', function() {
+                var tr = $(this).closest('tr');
+
+                if (confirm('Anda yakin mau menghapus item ini?!'))
+                {
+                    $(tr).fadeOut().detach();
+                }
+            });
+
+            $('.input-qty').on('change', function() {
+                var tr = $(this).closest('tr');
+                var price = $('.book_price', $(tr)).html();
+                var discount = $('.input-discount').val();
+
+                if (discount > 0) {
+                    price = price - (price * (discount/100));
+                }
+
+                var subTotal = price * $(this).val();
+
+                $('.sub_total', $(tr)).html(subTotal);
+                calculateTotal();
+            });
+
+            $('.input-discount').on('change', function() {
+                var tr = $(this).closest('tr');
+                $('.input-qty', $(tr)).trigger('change');
+            });
+
+            function calculateTotal() {
+                var total = 0;
+
+                $('.sub_total').each(function (i, e) {
+                    total = total + parseFloat($(e).html());
+                });
+
+                $('input[name=grandTotal]').val(total);
+            };
+        });
+    </script>
 @endsection

@@ -136,4 +136,13 @@ class BookController extends Controller
 
         return view('layouts.master.modal.book', ['book'=> $book]);
     }
+
+    public function addSale($id)
+    {
+        $book = Book::find($id);
+
+        if ($book instanceof Book) return response()->json([], 400);
+
+        return view('layouts.master.partial.book', [ 'book' => $book]);
+    }
 }
