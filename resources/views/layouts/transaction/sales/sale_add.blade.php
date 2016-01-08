@@ -36,7 +36,9 @@
                         <div class="col-sm-3">
                             <select id="BookSelection" class="form-control">
                                 <option value="">Pilih Buku</option>
-                                <option value=""></option>
+                                @foreach ($books as $book)
+                                <option value="{{ $book->id }}">{{ $book->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div>

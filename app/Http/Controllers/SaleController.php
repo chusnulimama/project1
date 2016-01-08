@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +26,9 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('/layouts/transaction/sales/sale_add');
+        $books = Book::all();
+
+        return view('/layouts/transaction/sales/sale_add', [ 'books' => $books ]);
     }
 
     /**
