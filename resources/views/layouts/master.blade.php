@@ -49,7 +49,6 @@
         {!! HTML::script('assets/js/jquery.scrollTo.min.js') !!}
         <script src="{{ asset('assets/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
         {!! HTML::script('assets/js/common-scripts.js') !!}
-
     @show
 </body>
 </html>
