@@ -82,7 +82,7 @@
                 } else {
                     $.ajax({
                         type: 'GET',
-                        url: '/book/receive-add' + $(bookSelector).val(),
+                        url: '/book/receive-add/' + $(bookSelector).val(),
                         success: function(response)
                         {
                             var id = $('input.book_id', $($.parseHTML(response))).val();
@@ -99,7 +99,7 @@
                 }
             });
 
-            $('table#transactionDetails').on('click', '.btn_delete', function(){
+            $('table#transactionDetails').on('click', '.btn-delete', function(){
                 var tr = $(this).closest('tr');
 
                 if (confirm('Anda yakin untuk menghapus item ini?'))
@@ -115,7 +115,8 @@
 
                 var subTotal = price * $(this).val();
 
-                $('.subTotal', $(tr)).html(subTotal);
+                $('.sub_total', $(tr)).val(subTotal);
+
                 calculateTotal();
             });
 
@@ -127,8 +128,8 @@
             function calculateTotal(){
                 var total = 0;
 
-                $('.subTotal').each(function (i,e) {
-                    total = total + parseFloat($(e). html());
+                $('.sub_total').each(function(i,e) {
+                    total = total + parseFloat($(e). val());
                 })
 
                 $('.input[grandTotal]').val(total);

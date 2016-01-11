@@ -127,7 +127,7 @@
 
                 var subTotal = price * $(this).val();
 
-                $('.sub_total', $(tr)).html(subTotal);
+                $('.sub_total', $(tr)).val(subTotal);
                 calculateTotal();
             });
 
@@ -140,7 +140,7 @@
                 var total = 0;
 
                 $('.sub_total').each(function (i, e) {
-                    total = total + parseFloat($(e).html());
+                    total = total + parseFloat($(e).val());
                 });
 
                 $('input[name=grandTotal]').val(total);
