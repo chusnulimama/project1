@@ -28,6 +28,7 @@ Route::get('/book/create', 'BookController@create');
 Route::post('/book/create', 'BookController@store');
 Route::get('/book/edit/{id}', 'BookController@edit');
 Route::get('/book/sale-add/{id}', 'BookController@addSale');
+Route::get('/book/receive-add/{id}', 'BookController@addReceive');
 Route::post('/book/update/{id}', [
     'as'    => 'book.update',
     'uses'  => 'BookController@update']);

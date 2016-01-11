@@ -141,8 +141,17 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        if ($book instanceof Book) return response()->json([], 400);
+        if (! $book instanceof Book) return response()->json([], 400);
 
         return view('layouts.master.partial.book', [ 'book' => $book]);
+    }
+
+    public function addReceive($id)
+    {
+        $book = Book::find($id);
+
+        if (! $book instanceof Book) return response()->json([], 400);
+
+        return view('layouts.master.partial.book_receive', [ 'book' => $book]);
     }
 }

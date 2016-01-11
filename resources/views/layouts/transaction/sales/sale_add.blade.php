@@ -8,15 +8,9 @@
             <div class="content-panel">
                 <form action="{{url('/sale/create')}}" method="POST" class="form-horizontal" >
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label"><h4>No.Faktur *</h4></label>
+                        <label for="" class="col-sm-2 control-label"><h4>Nama Pelanggan *</h4></label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" value="" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label"><h4>Pelanggan *</h4></label>
-                        <div class="col-sm-3">
-                            <select name="" class="form-control">
+                            <select name="cust[]" class="form-control">
                                 <option value="">Pilih Pelanggan</option>
                                 <option value=""></option>
                             </select>
@@ -42,7 +36,7 @@
                             </select>
                         </div>
                         <div>
-                            <button class="btn-default btn-sm btn-add-book">Tambah Buku</button>
+                            <a href="javascript:void(null)" class="btn btn-default btn-sm btn-add-book">Tambah Buku</a>
                         </div>
                     </div>
 
@@ -50,7 +44,7 @@
                         <hr>
                         <thead>
                         <tr class="heading">
-                            <th>Judul Buku</th>
+                            <th >Judul Buku</th>
                             <th>Penerbit</th>
                             <th>Kuantitas</th>
                             <th>Harga Satuan</th>
@@ -63,8 +57,8 @@
                         </tbody>
                         <tfoot>
                             <tr id="total">
-                                <td colspan="5" style="text-align: right">TOTAL</td>
-                                <td><input name='grandTotal' type="text" class="span3" style="text-align: right" readonly></td>
+                                <td colspan="5" style="text-align: right">Grand Total</td>
+                                <td><input name='grandTotal' type="text" class="span3 form-control" style="text-align: right" readonly></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -97,23 +91,32 @@
                         url: '/book/sale-add/' + $(bookSelector).val(),
                         success: function(response)
                         {
-                            $('table#transactionDetails tbody').append(response);
+                            var id = $('input.book_id', $($.parseHTML(response))).val();
+
+                            if ($('table#transactionDetails tr#book-' + id).length > 0)
+                            {
+                                alert('ojok ditambahi maneh cak');
+                            } else {
+                                $('table#transactionDetails tbody').append(response);
+                            }
+
                             calculateTotal();
                         }
                     });
                 }
             });
 
-            $('table#transactionDetails tbody .btn-delete').on('click', function() {
+            $('table#transactionDetails').on('click', '.btn-delete', function() {
                 var tr = $(this).closest('tr');
 
                 if (confirm('Anda yakin mau menghapus item ini?!'))
                 {
                     $(tr).fadeOut().detach();
+                    calculateTotal();
                 }
             });
 
-            $('.input-qty').on('change', function() {
+            $('table#transactionDetails').on('change', '.input-qty', function() {
                 var tr = $(this).closest('tr');
                 var price = $('.book_price', $(tr)).html();
                 var discount = $('.input-discount').val();
@@ -128,7 +131,7 @@
                 calculateTotal();
             });
 
-            $('.input-discount').on('change', function() {
+            $('table#transactionDetails').on('change', '.input-discount', function() {
                 var tr = $(this).closest('tr');
                 $('.input-qty', $(tr)).trigger('change');
             });
