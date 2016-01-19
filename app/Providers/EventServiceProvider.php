@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Transaction\WasCreated' => [
             'App\Listeners\Transaction\ChangeIdTransaction',
+            'App\Listeners\Transaction\GetStockBook',
         ],
     ];
 

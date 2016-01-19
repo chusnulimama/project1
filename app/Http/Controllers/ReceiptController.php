@@ -48,11 +48,12 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        try{
             $this->dispatch(new CreateTransaction($request));
-        } catch(\Exception $msgerror){
-            dd($msgerror->getMessage());
-        }
+//          try{
+//            $this->dispatch(new CreateTransaction($request));
+//        } catch(\Exception $msgerror){
+//            dd($msgerror->getMessage());
+//        }
 
         return redirect()->route('receive');
     }
