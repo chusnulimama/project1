@@ -20,6 +20,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->integer('qty');
             $table->integer('price');
             $table->integer('disc');
+            $table->integer('subtotal');
             $table->timestamps();
 
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');

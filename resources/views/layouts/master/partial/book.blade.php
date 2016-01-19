@@ -9,7 +9,7 @@
     </td>
     <td style="width: 100px;" class="text-center">
         <div class="input-group">
-            <input type="number" class="form-control input-sm input-discount" max="99" value="0">
+            <input type="number" class="form-control input-sm input-discount" name="items[disc][]" max="99" value="0">
             <span class="input-group-addon">%</span>
         </div>
     </td>
@@ -19,5 +19,5 @@
     <td style="text-align: center">
         <a href="javascript:void(null)" class="btn-delete btn btn-danger"><i class="fa fa-trash-o"></i></a>
     </td>
-    <input type="hidden" name="item[id][]" class="book_id" value="{{ $book->id }}">
+    <input type="hidden" name="items[id][]" class="book_id" value="{{ $book->id }}">
 </tr>

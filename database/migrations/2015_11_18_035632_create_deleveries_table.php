@@ -14,15 +14,15 @@ class CreateDeleveriesTable extends Migration
     {
         Schema::create('deliveries', function(Blueprint $table){
             $table->engine="InnoDB";
-            $table->increments('id');
+            $table->increments('delivery_id');
             $table->unsignedInteger('transaction_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('person_in_charge');
             $table->date('date_sent');
-            $table->enum('status', ['Accepted', 'Rejected']);
+            $table->enum('status', ['Accepted', 'Pending', 'Rejected']);
             $table->timestamps();
 
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('person_in_charge')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

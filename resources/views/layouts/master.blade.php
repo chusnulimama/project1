@@ -14,11 +14,14 @@
     <link rel="stylesheet" href="assets/css/zabuto_calendar.css" type="text/css">
     <link rel="stylesheet" href="assets/js/gritter/css/jquery.gritter.css" type="text/css">
     <link rel="stylesheet" href="assets/lineicons/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/zabuto_calendar.css" type="text/css">
 
     {!! HTML::style('assets/css/style-responsive.css') !!}
     {!! HTML::style('assets/css/style.css') !!}
+    {!! HTML::script('assets/css/zabuto_calendar.css') !!}
 
     {!! HTML::script('assets/js/chart-master/Chart.js') !!}
+
 </head>
 <body>
     <section id="container">

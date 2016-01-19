@@ -6,6 +6,7 @@ use App\Book;
 use App\Transaction;
 use App\User;
 use Illuminate\Http\Request;
+use App\Jobs\Transaction\CreateTransaction;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -31,11 +32,12 @@ class ReceiptController extends Controller
      */
     public function create()
     {
+        $today = date("d M Y");
         $supps = User::whereHas('roles', function($query){
             $query->where('description', 'Supplier');
         })->get();
         $books = Book::all();
-        return view('layouts.transaction.receipts.receive_add')->with('supps', $supps)->with('books', $books);
+        return view('layouts.transaction.receipts.receive_add')->with('supps', $supps)->with('books', $books)->with('today', $today);
     }
 
     /**
@@ -46,7 +48,13 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $this->dispatch(new CreateTransaction($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('receive');
     }
 
     /**
