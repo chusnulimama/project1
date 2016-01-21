@@ -48,12 +48,12 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-            $this->dispatch(new CreateTransaction($request));
-//          try{
 //            $this->dispatch(new CreateTransaction($request));
-//        } catch(\Exception $msgerror){
-//            dd($msgerror->getMessage());
-//        }
+          try{
+            $this->dispatch(new CreateTransaction($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
 
         return redirect()->route('receive');
     }
@@ -75,7 +75,7 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Transaction $transaction)
     {
         return view('layouts.transaction.receipts.receive_edit');
     }
@@ -87,9 +87,14 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Transaction $transaction)
     {
-        //
+        try{
+            $this->dispatch(new UpdateTransaction($transaction, $request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('receive');
     }
 
     /**

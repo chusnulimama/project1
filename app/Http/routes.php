@@ -107,19 +107,21 @@ Route::post('user/update/{user_id}', [
     'as'    => 'user.update',
     'uses'  => 'UserController@update']);
 Route::post('/user/destroy/{user_id}', 'UserController@destroy');
+
 Route::model('user_id', \App\User::class);
 
+Route::model('transaction_id', \App\Transaction::class);
 //receive control
 Route::get('/receive', [
     'as'    => 'receive',
     'uses'  => 'ReceiptController@index']);
 Route::get('/receive/create', 'ReceiptController@create');
 Route::post('/receive/create', 'ReceiptController@store');
-Route::get('/receive/edit/{trans_id}', 'ReceiptController@edit');
-Route::post('/receive/update/{trans_id}', [
+Route::get('/receive/edit/{transaction_id}', 'ReceiptController@edit');
+Route::post('/receive/update/{transaction_id}', [
     'as'    => 'receive.update',
     'uses'  => 'ReceiptController@update']);
-Route::post('/receive/destroy/{trans_id}', 'ReceiptController@destroy');
+Route::post('/receive/destroy/{transaction_id}', 'ReceiptController@destroy');
 
 //sales control
 Route::get('/sale', [

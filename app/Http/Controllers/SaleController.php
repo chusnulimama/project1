@@ -26,7 +26,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        $books = Book::all();
+        $books = Book::where('stock', '!=', 0)->get();
 
         return view('/layouts/transaction/sales/sale_add', [ 'books' => $books ]);
     }

@@ -24,9 +24,9 @@ class SetPriceBook
             $book = $detail->book;
 
             //memasukkan harga barang yg diterima dari supp
-            if($transaction->type = 'Receive')
+            if($transaction->type == 'Receive')
             {
-                if($book->qty > 0)
+                if($book->qty <= 0)
                 {
                     $book->price = (int) $detail->price + ((int) $detail->price * 30/100);
                 } else {

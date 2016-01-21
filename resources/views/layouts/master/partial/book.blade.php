@@ -2,7 +2,7 @@
     <td>{{ $book->name }}</td>
     <td>{{ $book->publisher }}</td>
     <td style="width: 20px;">
-        <input type="number" max="100" class="form-control input-sm input-qty" name="items[qty][]" value="1">
+        <input type="number" max="100" class="form-control input-sm input-qty"  max="{{ $book->stock }}" name="items[qty][]" value="0">
     </td>
     <td class="text-center">
         <span class="book_price">{{ $book->price }}</span>

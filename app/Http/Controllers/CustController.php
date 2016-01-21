@@ -79,8 +79,8 @@ class CustController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
-        return view('layouts.master.cust.cust_edit')->with('roles', $roles)->with('user', $user);
+//        $roles = Role::all();
+        return view('layouts.master.cust.cust_edit')->with('user', $user);
     }
 
     /**
