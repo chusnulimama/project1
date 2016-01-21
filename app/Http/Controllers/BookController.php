@@ -143,7 +143,7 @@ class BookController extends Controller
 
         if (! $book instanceof Book) return response()->json([], 400);
 
-        return view('layouts.master.partial.book', [ 'book' => $book]);
+        return view('layouts.master.partial.book', [ 'book' => $book, 'detail' => null]);
     }
 
     public function addReceive($id)
@@ -152,6 +152,6 @@ class BookController extends Controller
 
         if (! $book instanceof Book) return response()->json([], 400);
 
-        return view('layouts.master.partial.book_receive', [ 'book' => $book]);
+        return view('layouts.master.partial.book_receive', [ 'book' => $book, 'detail' => null]);
     }
 }

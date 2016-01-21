@@ -77,7 +77,18 @@ class ReceiptController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        return view('layouts.transaction.receipts.receive_edit');
+        $today = date("d M Y");
+        $supps = User::whereHas('roles', function($query){
+            $query->where('description', 'Supplier');
+        })->get();
+        $books = Book::all();
+
+        return view('layouts.transaction.receipts.receive_edit', [
+            'today' => $today,
+            'supps' => $supps,
+            'books' => $books,
+            'transaction' => $transaction
+        ]);
     }
 
     /**
