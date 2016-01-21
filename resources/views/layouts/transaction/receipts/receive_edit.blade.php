@@ -1,92 +1,157 @@
 @extends('layouts.master')
 @section('content')
 
-    <h3>Tambah Pembelian Barang</h3>
+    <h3>EDIT Pembelian Barang</h3>
 
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
-                <form action="{{url('/receive/create')}}" method="POST" class="form-horizontal" >
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label"><h4>Nama Pemasok *</h4></label>
-                        <div class="col-sm-3">
-                            <select name="supp[]" class="form-control" required>
-                                <option value="">Pilih Pemasok</option>
-                                @foreach($supps as $supp)
-                                    <option value="{{$supp->id}}">{{$supp->detail_name}}</option>
-                                @endforeach
-                            </select>
+                <div class="wrapper">
+                    <form action="{{url('/receive/create')}}" method="POST" class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label"><h4>Tanggal</h4></label>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="transaction[date_trans]" value="{{$today}}">
+                                    <span class="input-group-addon"><i class="glyphicon-calendar glyphicon"></i></span>
+                                    <input type="hidden" name="transaction[type]" value="Receive">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label"><h4>Buku</h4></label>
-                        <div class="col-sm-3">
-                            <select name="book[]" class="form-control">
-                                <option value="">Pilih Buku</option>
-                                @foreach($books as $book)
-                                    <option value="{{$book->isbn}}">{{$book->name}} || {{$book->author}} || {{$book->publisher}}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label"><h4>Nama Pemasok *</h4></label>
+                            <div class="col-sm-3">
+                                <select name="transaction[user_id]" class="form-control" required>
+                                    <option value="">Pilih Pemasok</option>
+                                    @foreach($supps as $supp)
+                                        <option value="{{$supp->id}}">{{$supp->detail_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div>
-                            <button class="btn-default btn-sm">Tambah Daftar</button>
-                            <button class="btn-default btn-sm">Hapus Daftar</button>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label"><h4>Buku</h4></label>
+                            <div class="col-sm-3">
+                                <select id="BookSelection" class="form-control">
+                                    <option value="">Pilih Buku</option>
+                                    @foreach($books as $book)
+                                        <option value="{{$book->id}}">{{$book->name}} || {{$book->author}} || {{$book->publisher}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <a href="javascript:void(null)" class="btn btn-default btn-sm btn-add-book">Tambah Buku</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <table class="table table-striped table-advance table-hover table-bordered">
-                        <hr>
-                        <thead>
-                        <tr>
-                            <th style="text-align: center">#</th>
-                            <th style="text-align: center">Judul Buku</th>
-                            <th style="text-align: center">Kuantitas</th>
-                            <th style="text-align: center">Harga Satuan (Supplier)</th>
-                            <th style="text-align: center;">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td style="text-align: center"><input type="checkbox"></td>
-                            <td class="col-md-4">
-                                <input type="text" class="form-control" disabled>
-                            </td>
-                            <td class="col-md-1">
-                                <input type="text" class="form-control">
-                            </td>
-                            <td class="col-md-3">
+                        <table class="table table-striped table-advance table-hover table-bordered" id="transactionDetails">
+                            <hr>
+                            <thead>
+                            <tr class="heading">
+                                <th style="text-align: center">Judul Buku</th>
+                                <th style="text-align: center">Kuantitas</th>
+                                <th style="text-align: center">Harga Satuan (Supplier)</th>
+                                <th style="text-align: center;">Total</th>
+                                <th style="text-align: center">Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($transaction->details as $detail )
+                                    @include('layouts.master.partial.book_receive', [ 'book' => $detail->book, 'detail' => $detail ])
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                            <th colspan="3" style="text-align: right">Grand Total</th>
+                            <th class="col-md-3">
                                 <div class="input-group">
                                     <div class="input-group-addon">Rp</div>
-                                    <input type="text" class="form-control" style="text-align: right">
+                                    <input type="text" class="form-control col-md-3" id="grandTotal" name="transaction[total]" value="{{old('transaction.total')}}" style="text-align: right" readonly>
                                 </div>
-                            </td>
-                            <td class="col-md-3">
+                            </th>
+                            </tfoot>
+                        </table>
+                        <div class="form-group">
+                            <div class="col-sm-5">
                                 <div class="input-group">
-                                    <div class="input-group-addon">Rp</div>
-                                    <input type="text" class="form-control col-md-3" style="text-align: right" disabled>
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <a href="{{url('/receive')}}" class="btn btn-warning">Batal</a>
+                                    <button type="submit" class="btn btn-default">Simpan</button>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th colspan="4" style="text-align: right">Grand Total</th>
-                            <td class="col-md-3">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Rp</div>
-                                    <input type="text" class="form-control col-md-3" style="text-align: right" disabled>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-group">
-                        <div class="col-sm-5">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <a href="{{url('/receive')}}" class="btn btn-warning">Batal</a>
-                            <button type="submit" class="btn btn-default">Simpan</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.btn-add-book').on('click', function(){
+                var bookSelector = $('#BookSelection');
+
+                if($(bookSelector).val() == null || $(bookSelector).val() == '')
+                {
+                    alert('Pilih Buku terlebih dahulu!');
+                } else {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/book/receive-add/' + $(bookSelector).val(),
+                        success: function(response)
+                        {
+                            var id = $('input.book_id', $($.parseHTML(response))).val();
+
+                            if ($('table#transactionDetails tr#book_receive-' + id).length > 0)
+                            {
+                                alert('Buku sudah diambil!');
+                            } else {
+                                $('table#transactionDetails tbody').append(response);
+                            }
+                            calculateTotal();
+                        }
+                    });
+                }
+            });
+
+            $('table#transactionDetails').on('click', '.btn-delete', function(){
+                var tr = $(this).closest('tr');
+
+                if (confirm('Anda yakin untuk menghapus item ini?'))
+                {
+                    $(tr).fadeOut().detach();
+                    calculateTotal();
+                }
+            });
+
+//            $('table#transactionDetails').on('change', '.input-qty', function(){
+//                var tr = $(this).closest('tr');
+//                $('.input-price', $(tr)).trigger('change');
+//            });
+
+            $('table#transactionDetails').on('change', '.input-price', function(){
+                var tr = $(this).closest('tr');
+                var price = $(this).val();
+                var qty = $('.input-qty', $(tr)).val();
+
+                var subTotal = qty * price;
+
+                $('.sub_total', $(tr)).val(subTotal);
+
+                calculateTotal();
+            });
+
+            function calculateTotal(){
+                var total = 0;
+
+                $('.sub_total').each(function(i,e) {
+                    total = total + parseFloat($(e). val());
+                })
+
+                $('input[id=grandTotal]').val(total);
+            };
+        });
+    </script>
 @endsection
