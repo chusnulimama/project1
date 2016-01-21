@@ -15,7 +15,7 @@ class Book extends Model
 {
     protected $table = 'books';
 
-    protected $fillable = ['ISBN', 'name', 'author', 'publisher', 'supplier', 'category', 'release', 'stock'];
+    protected $fillable = ['ISBN', 'name', 'author', 'publisher', 'supplier', 'category', 'release', 'price','stock'];
 
     public $timestamps = false;
 }

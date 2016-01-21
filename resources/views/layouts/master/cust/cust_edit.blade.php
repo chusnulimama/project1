@@ -14,7 +14,7 @@
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="user[username]" value="{{old('user.username', $user->username)}}">
                             <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="id_Cust">
+                            <input type="hidden" class="form-control" name="roles[]" value="4">
                             {!! $errors->first('user.username', '<p class="help-block"> :message</p>') !!}
                         </div>
                     </div>

@@ -32,7 +32,7 @@ class GetStockBook
                 $book->stock = (int) $book->stock - (int) $detail->qty;
                 if($book->stock <= 0 )
                 {
-                    confirm("Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia");
+                    throw new \Exception('Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia');
                 }
             }
 

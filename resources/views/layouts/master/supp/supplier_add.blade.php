@@ -14,7 +14,7 @@
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="user[username]" value="{{old('user.username')}}">
                             <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="1">
+                            <input type="hidden" class="form-control" name="roles[]" value="2">
                         </div>
                     </div>
                     <div class="form-group">
