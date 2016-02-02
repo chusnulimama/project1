@@ -22,6 +22,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->integer('disc');
             $table->integer('subtotal');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');

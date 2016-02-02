@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="content-panel">
                 <div class="wrapper">
-                    <form action="{{url('/receive/create')}}" method="POST" class="form-horizontal" >
+                    <form action="{{url('/receive/edit/',$transaction->id)}}" method="POST" class="form-horizontal" >
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label"><h4>Tanggal</h4></label>
                             <div class="col-sm-2">
@@ -56,7 +56,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($transaction->details as $detail )
+                                @foreach ($transaction->trans_detail()->get() as $detail )
                                     @include('layouts.master.partial.book_receive', [ 'book' => $detail->book, 'detail' => $detail ])
                                 @endforeach
                             </tbody>
@@ -152,6 +152,8 @@
 
                 $('input[id=grandTotal]').val(total);
             };
+
+            calculateTotal();
         });
     </script>
 @endsection

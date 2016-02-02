@@ -28,12 +28,8 @@ class GetStockBook
             if($transaction->type == 'Receive')
             {
                 $book->stock = (int) $book->stock + (int) $detail->qty;
-            } else {
+            } elseif($transaction->type == 'Sale') {
                 $book->stock = (int) $book->stock - (int) $detail->qty;
-                if($book->stock <= 0 )
-                {
-                    throw new \Exception('Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia');
-                }
             }
 
             $book->save();

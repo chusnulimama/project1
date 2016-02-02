@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\TransactionDetail;
+use App\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'transactions';
 
     protected $fillable = ['id', 'user_id', 'transaction_id', 'date_trans', 'total', 'payment', 'type'];
@@ -21,10 +26,10 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
     }
 
-    public function trans_user()
+    public function user()
     {
         //menunjukkan bahwa transaksi ini dilakukan oleh user mana.
-        return $this->belongsToMany(User::class, 'user_id', 'transaction_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function deliveries()
@@ -33,19 +38,10 @@ class Transaction extends Model
         return $this->belongsTo(Delivery::class, 'transaction_id', 'user_id', 'delivery_id');
     }
 
-//    public function setBooksPriceAttribute()
-//    {
-//       $book = [];
-//        foreach ($this->books as $_book)
-//        {
-//            $book[] = $_book->price;
-//        }
-//        $this->attributes['price'] = ($book*30)/100);
-//    }
-
-    public function setBooksStockAttribute()
+    public function setDateTransAttribute($date_trans)
     {
-//        $this->?attribute[stock] = $;
+        return $this->attributes['date_trans'] = date('Y-m-d H:i:s', strtotime($date_trans));
     }
 
+    protected $dates = ['deleted_at'];
 }

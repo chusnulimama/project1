@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +39,13 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('/layouts/master/books/books_add');
+        $publishers = User::whereHas('roles', function($subQuery){
+            $subQuery->where('description', 'Publisher');
+        })->get();
+        $suppliers = User::whereHas('roles', function($subQuery){
+            $subQuery->where('description', 'Supplier');
+        })->get();
+        return view('/layouts/master/books/books_add')->with('publishers', $publishers)->with('suppliers', $suppliers);
     }
 
     /**

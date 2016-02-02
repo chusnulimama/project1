@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Jobs\Transaction\CreateTransaction;
+use App\Jobs\Transaction\UpdateTransaction;
+use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -16,7 +20,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('/layouts/transaction/sales/sale');
+        $sales = Transaction::type('Sale')->paginate(5);
+        return view('/layouts/transaction/sales/sale', ['sales' => $sales]);
     }
 
     /**
@@ -26,9 +31,13 @@ class SaleController extends Controller
      */
     public function create()
     {
+        $date = date('d M Y');
         $books = Book::where('stock', '!=', 0)->get();
+        $custs = User::whereHas('roles', function($query){
+           $query->where('description', 'Customer');
+        })->get();
 
-        return view('/layouts/transaction/sales/sale_add', [ 'books' => $books ]);
+        return view('/layouts/transaction/sales/sale_add')->with('books', $books)->with('custs', $custs)->with('date', $date);
     }
 
     /**
@@ -37,9 +46,20 @@ class SaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Book $book)
     {
-        //
+        if($book->stock < 1 )
+        {
+            throw new \Exception('Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia');
+        }
+
+        try{
+            $this->dispatch(new CreateTransaction($request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+
+        return redirect()->route('sale');
     }
 
     /**
@@ -59,9 +79,18 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Transaction $transaction)
     {
-        return view('/layouts/transaction/sales/sale_edit');
+        $books = Book::where('stock', '!=', 0)->get();
+        $custs = User::whereHas('roles', function($query){
+            $query->where('description', 'Customer');
+        })->get();
+
+        return view('/layouts/transaction/sales/sale_edit', [
+            'custs' => $custs,
+            'books' => $books,
+            'transaction' => $transaction,
+        ]);
     }
 
     /**
@@ -71,9 +100,14 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Transaction $transaction)
     {
-        //
+        try{
+            $this->dispatch(new UpdateTransaction($transaction, $request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('sale');
     }
 
     /**
@@ -86,4 +120,10 @@ class SaleController extends Controller
     {
         //
     }
+
+    public function modal(Transaction $sale)
+    {
+        return view('layouts.master.modal.sale', ['sale'=>$sale]);
+    }
+
 }

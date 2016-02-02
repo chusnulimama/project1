@@ -1,8 +1,8 @@
         <!--sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
 
-            <p class="centered"><a href="profile"><img src="assets/img/JPbooks-logo.jpg" class="img-circle" width="80"></a></p>
-            <h5 class="centered">JP-Books Store</h5>
+            <p class="centered"><a href="profile"><img src="assets/img/book_logo.png" class="img-circle" width="80"></a></p>
+            <h5 class="centered">IBOE Mitra Media</h5>
             
             <li class="mt">
                 <a href="/home">
@@ -16,11 +16,11 @@
                     <span>Data Master</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('/book')}}">Buku</a></li>
                     <li><a href="{{URL::to('/employee')}}">Pegawai</a></li>
                     <li><a href="{{URL::to('/supplier')}}">Pemasok</a></li>
                     <li><a href="{{URL::to('/publisher')}}">Penerbit</a></li>
                     <li><a href="{{URL::to('/customer')}}">Pelanggan</a></li>
+                    <li><a href="{{URL::to('/book')}}">Buku</a></li>
                 </ul>
             </li>
 
@@ -31,7 +31,7 @@
                 </a>
                     <ul class="sub">
                         <li><a href="{{URL::to('/receive')}}">Pembelian Buku</a></li>
-                        <li><a href="{{URL::to('/delivery')}}">Pengiriman Buku</a></li>
+{{--                        <li><a href="{{URL::to('/delivery')}}">Pengiriman Buku</a></li>--}}
                         <li><a href="{{URL::to('/sale')}}">Penjualan Buku</a></li>
                     </ul>
             </li>
@@ -41,7 +41,7 @@
                     <span>Laporan</span>
                 </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/report/receive')}}">Pemasukkan</a></li>
+                        <li><a href="{{route('reportReceive')}}">Pemasukkan</a></li>
                         <li><a href="{{URL::to('/report/sale')}}">Penjualan</a></li>
                     </ul>
             </li>

@@ -32,21 +32,57 @@
                         <td>{{$receive->user_id}}</td>
                         <td>{{$receive->date_trans}}</td>
                         <td class="centered">
-                            <a href="{{url('/receive/view/')}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                            <a href="{{ url('/receive/edit/') }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                            <a href="{{url('/receive/destroy/')}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                            <a href="{{url('/receive/view/'.$receive->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+{{--                            <a href="{{ url('/receive/edit/'.$receive->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>--}}
+                            <a href="{{url('/receive/destroy/'.$receive->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="glyphicon glyphicon-remove"></i></a>
                         </td>
                     </tr>
                     @empty
                         <tr>
-                            <td colspan="12">Tidak ada data</td>
+                            <td colspan="12">Tidak ada data transaksi</td>
                         </tr>
                     @endforelse
                     </tbody>
                 </table>
+                <form action="" id="formDelete" method="post">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                </form>
             </div>
             {!! $receipts->render() !!}
+            <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        {{--ambil body dari modal di--}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+@endsection
+
+@section('javascript')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //target link
+            $('a.btn-delete').on('click', function(e){
+                //blok default action ke href
+                e.preventDefault();
+
+                //ambil form delete
+                var form = $("#formDelete");
+                var del = confirm('Apakah anda yakin untuk melakukan pembatalan transaksi penerimaan ini?');
+                if(del==true)
+                {
+                    //ganti form action attribute dengan href attribute
+                    form.attr('action', $(this).attr('href'));
+                } else {
+                    return del;
+                }
+                //form submit
+                form.submit();
+            });
+        });
+    </script>
 @endsection

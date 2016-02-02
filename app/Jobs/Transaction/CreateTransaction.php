@@ -34,10 +34,12 @@ class CreateTransaction extends Job implements SelfHandling
     {
         $date = date("dmY");
         $data = $this->request->input('transaction');
-        if($data['type'] = 'Receive'){
+        if($data['type'] == 'Receive'){
             $data['transaction_id'] = 'R/'.$date.'/';
-        } else{
+        } elseif($data['type'] == 'Sale'){
             $data['transaction_id'] = 'SL/'.$date.'/';
+        } elseif($data['type'] == 'Delivery'){
+            $data['transaction_id'] = 'PO/'.$date.'/';
         };
 
         $feed = Transaction::create($data);

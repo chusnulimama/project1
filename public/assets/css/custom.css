@@ -5,3 +5,18 @@ html{
     -o-background-size: cover;
     background-size: cover;
 }
+
+.padding-10{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.wrapper-new {
+    display: inline-block;
+    margin-top: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 0px;
+    width: 100%;
+}

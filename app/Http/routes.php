@@ -19,6 +19,7 @@ Route::get('/logout', 'Auth\AuthController@logout');
 
 Route::get('/home', 'HomeController@index');
 
+//DATA MASTER CONTROL
 //book control
 Route::get('/book', [
     'as'    => 'book',
@@ -110,8 +111,10 @@ Route::post('/user/destroy/{user_id}', 'UserController@destroy');
 
 Route::model('user_id', \App\User::class);
 
+//TRANSACTION CONTROL
 Route::model('transaction_id', \App\Transaction::class);
 //receive control
+Route::get('/receive/view/{transaction_id}', 'ReceiptController@modal');
 Route::get('/receive', [
     'as'    => 'receive',
     'uses'  => 'ReceiptController@index']);
@@ -124,18 +127,20 @@ Route::post('/receive/update/{transaction_id}', [
 Route::post('/receive/destroy/{transaction_id}', 'ReceiptController@destroy');
 
 //sales control
+Route::get('/sale/view/{transaction_id}', 'SaleController@modal');
 Route::get('/sale', [
     'as'    => 'sale',
     'uses'  => 'SaleController@index']);
 Route::get('/sale/create', 'SaleController@create');
 Route::post('/sale/create', 'SaleController@store');
-Route::get('/sale/edit/{trans_id}', 'SaleController@edit');
-Route::post('/sale/update/{trans_id}', [
+Route::get('/sale/edit/{transaction_id}', 'SaleController@edit');
+Route::post('/sale/update/{transaction_id}', [
     'as'    => 'sale.update',
     'uses'  => 'SaleController@update']);
-Route::post('/sale/destroy/{trans_id}', 'SaleController@destroy');
+Route::post('/sale/destroy/{transaction_id}', 'SaleController@destroy');
 
 //delivery control
+Route::get('/delivery/view/{transaction_id}', 'SaleController@modal');
 Route::get('/delivery', [
     'as'    => 'delivery',
     'uses'  => 'SaleController@index']);
@@ -147,6 +152,21 @@ Route::post('/delivery/update/{trans_id}', [
     'uses'  => 'SaleController@update']);
 Route::post('/delivery/destroy/{trans_id}', 'SaleController@destroy');
 
+
+//REPORT CONTROL
+//receipt report control
+Route::get('/report/receive/{transaction_id}', [
+    'as'    => 'reportReceive',
+    'uses'  => 'ReportReceiveController@index']);
+Route::post('/report/receive/{transaction_id}', 'ReportReceiveController@create');
+Route::post('/report/receive/{transaction_id}', 'ReportReceiveController@show');
+
+
+//sale report control
+Route::get('/report/sale', [
+    'as'    => 'reportSale',
+    'uses'  => 'ReportSaleController@index']);
+Route::get('/report/sale/show', 'ReportSaleController@show');
 //------------------------
 
 Route::get('auth/{driver}', 'Auth\AuthController@redirectToProvider');

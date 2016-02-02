@@ -21,7 +21,6 @@ class ReceiptController extends Controller
     public function index()
     {
         $receipts = Transaction::type('Receive')->paginate(5);
-
         return view('/layouts/transaction/receipts/receive', ['receipts' => $receipts]);
     }
 
@@ -77,6 +76,7 @@ class ReceiptController extends Controller
      */
     public function edit(Transaction $transaction)
     {
+//        dd($transaction);
         $today = date("d M Y");
         $supps = User::whereHas('roles', function($query){
             $query->where('description', 'Supplier');
@@ -114,8 +114,21 @@ class ReceiptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Transaction $transaction)
     {
-        //
+//        $input = $transaction->created_at;
+
+//        $duration = ;
+        try{
+            $this->dispatch(new DeleteTransaction($transaction, $request));
+        } catch(\Exception $msgerror){
+            dd($msgerror->getMessage());
+        }
+        return redirect()->route('receive');
+    }
+
+    public function modal(Transaction $receipt)
+    {
+        return view('layouts.master.modal.receipt', ['receipt'=>$receipt]);
     }
 }

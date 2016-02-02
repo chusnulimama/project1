@@ -56,6 +56,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {{--detail barang--}}
                             </tbody>
                             <tfoot>
                             <th colspan="3" style="text-align: right">Grand Total</th>

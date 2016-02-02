@@ -22,6 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->enum('payment', ['Cash','Consolidation', 'Consignment']);
             $table->enum('type', ['Receive', 'Sale']);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
