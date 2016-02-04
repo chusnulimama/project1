@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\TransactionDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +18,23 @@ class ReportSaleController extends Controller
      */
     public function index()
     {
-        //
+        $start = request()->input('from', Carbon::now()->format('d-m-Y'));
+        $until = request()->input('until', Carbon::now()->format('d-m-Y'));
+
+        $report = TransactionDetail::whereHas('master', function($subQuery) use($start, $until){
+            $subQuery->where('type', 'Sale');
+            $subQuery->where('date_trans', '>=', Carbon::createFromFormat('d-m-Y', $start)->format('Y-m-d'));
+            $subQuery->where('date_trans', '<=', Carbon::createFromFormat('d-m-Y', $until)->format('Y-m-d'));
+            $subQuery->groupBy('date_trans');
+        })->get();
+
+        $data = [
+            'from'      => $start,
+            'until'     => $until,
+            'report'    => $report,
+        ];
+
+        return view('layouts/report/table/sale_report', $data);
     }
 
     /**

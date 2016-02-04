@@ -10,17 +10,12 @@
 
                 <form class="form-horizontal style-form" action="{{url('/supplier/create')}}" method="post">
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">No. Pemasok</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" name="user[username]" value="{{old('user.username')}}">
-                            <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="2">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Nama</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name')}}">
+                            <input type="hidden" class="form-control" name="user[username]" value="SUPP.0">
+                            <input type="hidden" class="form-control" name="user[password]" value="1234">
+                            <input type="hidden" class="form-control" name="roles[]" value="2">
                         </div>
                     </div>
                     <div class="form-group">

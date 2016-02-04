@@ -29,12 +29,12 @@
                             {{--*/$number = $startNumber + ($key + 1);/*--}}
                         <td>{{$number}}</td>
                         <td>{{$sale->transaction_id}}</td>
-                        <td>{{$sale->name}}</td>
+                        <td>{{$sale->user_id}}</td>
                         <td>{{$sale->date_trans}}</td>
                         <td class="centered">
-                            <a href="{{url('/receive/view/'.$sale->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                            <a href="{{ url('/receive/edit/'.$sale->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                            <a href="{{url('/receive/destroy/'.$sale->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="{{url('/sale/view/'.$sale->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                            {{--<a href="{{ url('/receive/edit/'.$sale->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>--}}
+                            <a href="{{url('/sale/destroy/'.$sale->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="glyphicon glyphicon-remove"></i></a>
                         </td>
                     </tr>
                     @empty

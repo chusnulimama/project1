@@ -131,4 +131,10 @@ class ReceiptController extends Controller
     {
         return view('layouts.master.modal.receipt', ['receipt'=>$receipt]);
     }
+
+    public function faktur(Transaction $receipt)
+    {
+        $today = date('d M Y');
+        return view('layouts.report.print.faktur.receipt_print', ['receipt'=>$receipt])->with('today', $today);
+    }
 }

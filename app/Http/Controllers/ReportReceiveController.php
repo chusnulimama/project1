@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\Report\CreateReport;
 use App\Transaction;
+use App\TransactionDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,8 +20,23 @@ class ReportReceiveController extends Controller
      */
     public function index()
     {
-        $report = Transaction::type('Receive')->get();
-        return view('layouts/report/table/receipt_report', ['report' => $report]);
+        $start = request()->input('from', Carbon::now()->format('d-m-Y'));
+        $until = request()->input('until', Carbon::now()->format('d-m-Y'));
+
+        $report = TransactionDetail::whereHas('master', function($subQuery) use($start, $until) {
+            $subQuery->where('type', 'Receive');
+            $subQuery->where('date_trans', '>=', Carbon::createFromFormat('d-m-Y', $start)->format('Y-m-d'));
+            $subQuery->where('date_trans', '<=', Carbon::createFromFormat('d-m-Y', $until)->format('Y-m-d'));
+            $subQuery->groupBy('date_trans');
+        })->get();
+
+        $data = [
+            'from' => $start,
+            'until'=> $until,
+            'report' => $report
+        ];
+
+        return view('layouts/report/table/receipt_report', $data);
     }
 
     /**

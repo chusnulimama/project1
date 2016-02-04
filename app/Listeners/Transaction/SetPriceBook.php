@@ -37,6 +37,8 @@ class SetPriceBook
                     $book->price = $last * $new / $sum;
                 }
 
+                $book->supplier = $event->transaction->user_id;
+
             }
 
             $book->save();

@@ -6,43 +6,45 @@
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
-                <table class="table table-striped table-advance table-hover">
-                    <h4>Daftar Role</h4>
-                    @if(Session::has('message'))
-                        {!! Session::get('message') !!}
-                        @endif
+                <div class="padding-10">
+                    <table class="table table-striped table-advance table-hover">
+                        <h4>Daftar Role</h4>
+                        @if(Session::has('message'))
+                            {!! Session::get('message') !!}
+                            @endif
 
-                    <h6><a href="{{url('/role/create')}}" class="btn btn-primary btn-xs">Tambah</a></h6>
-                    <hr>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Jabatan</th>
-                        <th>Keterangan</th>
-                        <th class="centered">Aksi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($roles as $role)
-                    <tr>
-                        <td>{{$role->id}}</td>
-                        <td>{{$role->name}}</td>
-                        <td>{{$role->description}}</td>
-                        <td class="centered">
-                            <a href="{{ url('/role/edit/'.$role->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                            <a href="{{url('/role/destroy/'.$role->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                    @empty
+                        <h4><a href="{{url('/role/create')}}" class="btn btn-primary btn-xs">Tambah</a></h4>
+                        <hr>
+                        <thead>
                         <tr>
-                            <td colspan="12">Tidak ada data</td>
+                            <th>ID</th>
+                            <th>Jabatan</th>
+                            <th>Keterangan</th>
+                            <th class="centered">Aksi</th>
                         </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-                <form action="" id="formDelete" method="POST">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                </form>
+                        </thead>
+                        <tbody>
+                        @forelse($roles as $role)
+                        <tr>
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->name}}</td>
+                            <td>{{$role->description}}</td>
+                            <td class="centered">
+                                <a href="{{ url('/role/edit/'.$role->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="{{url('/role/destroy/'.$role->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="12">Tidak ada data</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                    <form action="" id="formDelete" method="POST">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -3,12 +3,26 @@
     <h4 class="modal-title">Detail Pelanggan</h4>
 </div>
 <div class="modal-body">
-    <h5>{{$cust->detail_name}}</h5>
-    <p>Alamat / Kota  : {{$cust->detail_address}} / {{$cust->detail_city}}</p>
-    <p>No.Telp        : {{$cust->detail_phone}}</p>
-    <p>No.Fax         : {{$cust->detail_fax}}</p>
-    <p>E-mail         : {{$cust->email}}</p>
-    <p>Keterangan     : {{$cust->detail_note}}</p>
+    <h3 style="text-align: center">{{$cust->detail_name}}</h3>
+    <h4 style="text-align: center">{{$cust->detail_city}}</h4>
+    <hr>
+    <table>
+        <tr>
+            <td style="padding-left: 20px">
+                <p>E-mail : {{$cust->email}}</p>
+                <p>Alamat : {{$cust->detail_address}}</p>
+            </td>
+            <td style="padding-left: 20px">
+                <p>No.Telp        : {{$cust->detail_phone}}</p>
+                <p>No.Fax         : {{$cust->detail_fax}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                <p>Keterangan     : {{$cust->detail_note}}</p>
+            </td>
+        </tr>
+    </table>
 </div>
 <div class="modal-footer">
     <a href="{!! URL::to('/customer') !!}" class="btn btn-default" role="button">Ok</a>

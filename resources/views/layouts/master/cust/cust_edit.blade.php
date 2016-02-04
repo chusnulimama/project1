@@ -9,19 +9,14 @@
                 <h4 class="mb">Ubah Data Pelanggan</h4>
 
                 <form action="{{url('/customer/update/'.$user->id)}}" method="post" class="form-horizontal style-form">
-                    <div class="form-group {{$errors->has('user.username') ? 'has-error' : ''}}">
-                        <label for="" class="col-sm-2 control-label">No Pelanggan</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" name="user[username]" value="{{old('user.username', $user->username)}}">
-                            <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="4">
-                            {!! $errors->first('user.username', '<p class="help-block"> :message</p>') !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('user.detail_name') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">Nama</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name', $user->detail_name)}}">
+                            <input type="hidden" class="form-control" name="user[username]" value="{{old('user.username', $user->username)}}">
+                            <input type="hidden" class="form-control" name="user[password]" value="1234">
+                            <input type="hidden" class="form-control" name="roles[]" value="4">
+                            {!! $errors->first('user.detail_name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -42,10 +37,11 @@
                             <input type="text" class="form-control" name="detail[phone]" value="{{old('detail.phone', $user->detail_phone)}}">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('user.email') ? 'has-error' : ''}}">
                         <label for="" class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="user[email]" value="{{old('user.email', $user->email)}}">
+                            {!! $errors->first('user.username', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group">

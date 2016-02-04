@@ -44,17 +44,12 @@
                             <input type="text" class="form-control" name="book[author]" value="{{old('book.author')}}">
                         </div>
                     </div>
-                    {{--<div class="form-group">--}}
-                        {{--<label for="" class="col-sm-2 control-label">Penerbit</label>--}}
-                        {{--<div class="col-sm-3">--}}
-                            {{--<select name="book[publisher]" class="form-control">--}}
-                                {{--<option value="">Pilih Penerbit</option>--}}
-                                {{--@foreach($publishers as $publisher)--}}
-                                    {{--<option value="{{$publisher->id}}">{{$publisher->name}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">Penerbit</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="book[publisher]" value="{{old('book.publisher')}}">
+                        </div>
+                    </div>
                     {{--<div class="form-group">--}}
                         {{--<label for="" class="col-sm-2 control-label">Pemasok</label>--}}
                         {{--<div class="col-sm-3">--}}

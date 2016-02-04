@@ -2,7 +2,7 @@
 @section('content')
 
     <h3>Data Pembelian Barang</h3>
-    <a href="{{url('/receive/create')}}" class="btn btn-success btn-lg" role="button"><i class="fa fa-plus-circle"></i>  Tambah</a>
+    <a href="{{url('/receive/create')}}" class="btn btn-success btn-lg" role="button"><i class="fa fa-plus-circle"></i> Tambah</a>
     @if(Session::has('message'))
         {!! Session::get('message') !!}
     @endif

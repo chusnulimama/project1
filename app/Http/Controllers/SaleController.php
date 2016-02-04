@@ -48,10 +48,10 @@ class SaleController extends Controller
      */
     public function store(Request $request, Book $book)
     {
-        if($book->stock < 1 )
-        {
-            throw new \Exception('Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia');
-        }
+//        if($book->stock < 1 )
+//        {
+//            throw new \Exception('Stok Buku tidak mencukupi! Silahkan periksa stok Buku yg tersedia');
+//        }
 
         try{
             $this->dispatch(new CreateTransaction($request));
@@ -121,9 +121,14 @@ class SaleController extends Controller
         //
     }
 
-    public function modal(Transaction $sale)
+    public function modal(Transaction $sales)
     {
-        return view('layouts.master.modal.sale', ['sale'=>$sale]);
+        return view('layouts.master.modal.sale', ['sales'=>$sales]);
     }
 
+    public function faktur(Transaction $sales)
+    {
+        $today = date('d M Y');
+        return view('layouts.report.print.faktur.sale_print', ['sales'=>$sales])->with('today', $today);
+    }
 }

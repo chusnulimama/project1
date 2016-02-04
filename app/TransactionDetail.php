@@ -19,4 +19,9 @@ class TransactionDetail extends Model
     }
 
     protected $dates = ['deleted_at'];
+
+    public function master()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id', 'id');
+    }
 }

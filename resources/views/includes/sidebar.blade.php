@@ -1,7 +1,7 @@
         <!--sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
 
-            <p class="centered"><a href="profile"><img src="assets/img/book_logo.png" class="img-circle" width="80"></a></p>
+            <p class="centered"><a href="{{url('/home')}}"><img src="assets/img/book_logo.png" class="img-circle" width="80"></a></p>
             <h5 class="centered">IBOE Mitra Media</h5>
             
             <li class="mt">
@@ -18,7 +18,7 @@
                 <ul class="sub">
                     <li><a href="{{URL::to('/employee')}}">Pegawai</a></li>
                     <li><a href="{{URL::to('/supplier')}}">Pemasok</a></li>
-                    <li><a href="{{URL::to('/publisher')}}">Penerbit</a></li>
+                    {{--<li><a href="{{URL::to('/publisher')}}">Penerbit</a></li>--}}
                     <li><a href="{{URL::to('/customer')}}">Pelanggan</a></li>
                     <li><a href="{{URL::to('/book')}}">Buku</a></li>
                 </ul>
@@ -26,7 +26,7 @@
 
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-desktop"></i>
+                    <i class="fa fa-shopping-cart"></i>
                     <span>Transaksi</span>
                 </a>
                     <ul class="sub">
@@ -37,11 +37,11 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-desktop"></i>
+                    <i class="fa fa-th-list"></i>
                     <span>Laporan</span>
                 </a>
                     <ul class="sub">
-                        <li><a href="{{route('reportReceive')}}">Pemasukkan</a></li>
+                        <li><a href="{{route('reportReceive')}}">Pembelian</a></li>
                         <li><a href="{{URL::to('/report/sale')}}">Penjualan</a></li>
                     </ul>
             </li>

@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Transaction\SetPriceBook',
             'App\Listeners\Transaction\GetStockBook',
         ],
+        'App\Events\User\WasCreated' => [
+            '\App\Listeners\DataUser\ChangeIdUser',
+        ],
     ];
 
     /**

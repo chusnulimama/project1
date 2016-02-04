@@ -6,67 +6,62 @@
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
-                <table class="table table-striped table-advance table-hover">
-                    <h4>Daftar Karyawan</h4>
-                    @if(Session::has('message'))
-                        {!! Session::get('message') !!}
-                    @endif
+                <div class="padding-10">
+                    <table class="table table-striped table-advance table-hover">
+                        <h4>Daftar Karyawan</h4>
+                        @if(Session::has('message'))
+                            {!! Session::get('message') !!}
+                        @endif
 
-                    <h6><a href="{!! URL::to('/employee/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
-                    <hr>
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Kota</th>
-                        <th>No.Telepon</th>
-                        <th>E-mail</th>
-                        <th>Jabatan</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        {{--*/$perPage = $employees->perPage(5);/*--}}
-                        {{--*/$currentPage = $employees->currentPage(1);/*--}}
-                        {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
-                        @forelse($employees as $key => $employee)
-                            {{--*/$number = $startNumber + ($key + 1);/*--}}
-                            <td>{{$number}}</td>
-                            <td>{{$employee->detail_name}}</td>
-                            <td>{{$employee->detail_address}}</td>
-                            <td>{{$employee->detail_city}}</td>
-                            <td>{{$employee->detail_phone}}</td>
-                            <td>{{$employee->email}}</td>
-                            <td>{{$employee->roles_name}}</td>
-                            <td>{{$employee->status}}</td>
-                            <td>{{$employee->detail_note}}</td>
-                            <td>
-                                <a href="{{url('/employee/view/'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                                <a href="{{url('/employee/edit/'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                <a href="{{url('/employee/destroy/'.$employee->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                    </tr>
-                    @empty
+                        <h4><a href="{!! URL::to('/employee/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h4>
+                        <hr>
+                        <thead>
                         <tr>
-                            <td colspan="12">Tidak ada data</td>
+                            <th style="text-align: center">No</th>
+                            <th>Nama</th>
+                            <th>E-mail</th>
+                            <th>Jabatan</th>
+                            <th>Status</th>
+                            <th style="text-align: center">Aksi</th>
                         </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                <form action="" id="formDelete" method="POST">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                </form>
-            </div>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {{--*/$perPage = $employees->perPage(5);/*--}}
+                            {{--*/$currentPage = $employees->currentPage(1);/*--}}
+                            {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
+                            @forelse($employees as $key => $employee)
+                                {{--*/$number = $startNumber + ($key + 1);/*--}}
+                                <td style="text-align: center">{{$number}}</td>
+                                <td>{{$employee->detail_name}}</td>
+                                <td>{{$employee->email}}</td>
+                                <td>{{$employee->roles_name}}</td>
+                                <td>{{$employee->status}}</td>
+                                <td style="text-align: center">
+                                    <a href="{{url('/employee/view/'.$employee->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                    <a href="{{url('/employee/edit/'.$employee->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{url('/employee/destroy/'.$employee->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="12">Tidak ada data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <form action="" id="formDelete" method="POST">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    </form>
+                    </div>
+                </div>
             {!! $employees->render() !!}
             <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

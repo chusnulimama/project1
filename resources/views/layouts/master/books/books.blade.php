@@ -18,12 +18,10 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">#</th>
-                            <th style="text-align: center">ISBN</th>
-                            <th style="text-align: center">Judul Buku</th>
-                            <th style="text-align: center">Penulis</th>
-                            <th style="text-align: center">Penerbit</th>
-                            <th style="text-align: right">Harga</th>
-                            <th style="text-align: right">Stok Barang</th>
+                            <th>ISBN</th>
+                            <th>Judul Buku</th>
+                            <th>Penulis</th>
+                            <th>Penerbit</th>
                             {{--<th class="centered">Cover Buku</th>--}}
                             <th style="text-align: center">Aksi</th>
                         </tr>
@@ -33,15 +31,13 @@
                                 {{--*/$perPage = $books->perPage(5);/*--}}
                                 {{--*/$currentPage = $books->currentPage(1);/*--}}
                                 {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
-                                @forelse($books as $key => $book)
-                                    {{--*/$number = $startNumber + ($key + 1);/*--}}
-                                <td style="text-align: center">{{$number}}</td>
-                                <td>{{$book->ISBN}}</td>
-                                <td>{{$book->name}}</td>
-                                <td>{{$book->author}}</td>
-                                <td>{{$book->publisher}}</td>
-                                <td style="text-align: right">{{$book->price}}</td>
-                                <td style="text-align: right">{{$book->stock}}</td>
+                                    @forelse($books as $key => $book)
+                                        {{--*/$number = $startNumber + ($key + 1);/*--}}
+                                        <td style="text-align: center">{{$number}}</td>
+                                        <td>{{$book->ISBN}}</td>
+                                        <td>{{$book->name}}</td>
+                                        <td>{{$book->author}}</td>
+                                        <td>{{$book->publisher}}</td>
                                 {{--<td class="centered"><img src="{{asset('img/'.$book->cover.'.jpg')}}" height="35" width="30"></td>--}}
                                 <td style="text-align: center">
                                     <a href="{{url('/book/view/'. $book->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>

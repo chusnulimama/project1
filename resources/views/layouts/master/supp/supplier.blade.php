@@ -6,58 +6,56 @@
     <div class="row mt">
         <div class="col-md-12">
             <div class="content-panel">
-                <table class="table table-striped table-advance table-hover">
-                    <h4>Daftar Pemasok</h4>
-                    @if(Session::has('message'))
-                        {!! Session::get('message') !!}
-                    @endif
+                <div class="padding-10">
+                    <table class="table table-striped table-advance table-hover">
+                        <h4>Daftar Pemasok</h4>
+                        @if(Session::has('message'))
+                            {!! Session::get('message') !!}
+                        @endif
 
-                    <h6><a href="{!! URL::to('/supplier/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h6>
-                    <hr>
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>ID Pemasok</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Kota</th>
-                        <th>No.Telepon</th>
-                        <th>No.Fax</th>
-                        <th>E-mail</th>
-                        <th>Status</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        @forelse($suppliers as $supplier)
-                            <td>no</td>
-                            <td>id_pemasok</td>
-                            <td>{{$supplier->detail_name}}</td>
-                            <td>{{$supplier->detail_address}}</td>
-                            <td>{{$supplier->detail_city}}</td>
-                            <td>{{$supplier->detail_phone}}</td>
-                            <td>{{$supplier->detail_fax}}</td>
-                            <td>{{$supplier->email}}</td>
-                            <td>{{$supplier->detail_status}}</td>
-                            <td>{{$supplier->detail_note}}</td>
-                            <td>
-                                <a href="{{url('/supplier/view/'.$supplier->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
-                                <a href="{{url('/supplier/edit/'.$supplier->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                <a href="{{url('/supplier/destroy/'.$supplier->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                    </tr>
-                    @empty
+                        <h4><a href="{!! URL::to('/supplier/create') !!}" class="btn btn-primary btn-xs" role="button">Tambah</a></h4>
+                        <hr>
+                        <thead>
                         <tr>
-                            <td colspan="12">Tidak ada data</td>
+                            <th style="text-align: center">No</th>
+                            <th>Kode Pemasok</th>
+                            <th>Nama</th>
+                            <th>E-mail</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
+                            <th style="text-align: center">Aksi</th>
                         </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-                <form action="" id="formDelete" method="POST">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                </form>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {{--*/$perPage = $suppliers->perPage(5);/*--}}
+                            {{--*/$currentPage = $suppliers->currentPage(1);/*--}}
+                            {{--*/$startNumber = ($currentPage - 1) * $perPage;/*--}}
+                            @forelse($suppliers as $key => $supplier)
+                                {{--*/$number = $startNumber + ($key + 1);/*--}}
+                                <td style="text-align: center">{{$number}}</td>
+                                <td>{{$supplier->username}}</td>
+                                <td>{{$supplier->detail_name}}</td>
+                                <td>{{$supplier->email}}</td>
+                                <td>{{$supplier->status}}</td>
+                                <td>{{$supplier->detail_note}}</td>
+                                <td style="text-align: center">
+                                    <a href="{{url('/supplier/view/'.$supplier->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+                                    <a href="{{url('/supplier/edit/'.$supplier->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{url('/supplier/destroy/'.$supplier->id)}}" class="btn btn-danger btn-xs btn-delete"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="12">Tidak ada data</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                    <form action="" id="formDelete" method="POST">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    </form>
+                </div>
             </div>
             {!! $suppliers->render() !!}
             <div role="dialog" tabindex="-1" id="myModal" class="modal fade">
