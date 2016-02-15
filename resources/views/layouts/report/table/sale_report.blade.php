@@ -44,8 +44,8 @@
                             {{--<td>{{ $number}}</td>--}}
                             <td>{{ $data->master->date_trans}}</td>
                             <td>{{ $data->master->transaction_id}}</td>
-                            <td>{{ $data->master->user_id}}</td>
-                            <td>{{ $data->book_id}}</td>
+                            <td>{{ $data->master->user->detail->name}}</td>
+                            <td>{{ $data->book->name}}</td>
                             <td>{{ $data->qty}}</td>
                             <td style="text-align: right;">{{ $data->price}}</td>
                             <td style="text-align: right">{{ $data->subtotal}}</td>

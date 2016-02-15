@@ -36,19 +36,19 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">Pemasok</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="book[supplier]" value="{{$book->supplier}}">
+                            <input type="text" class="form-control" name="book[supplier]" value="{{$book->supplier}}" readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Tahun Terbitan Buku</label>
+                        <label for="" class="col-sm-2 control-label">Tahun Terbit</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="book[release]" value="{{$book->release}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Jumlah</label>
+                        <label for="" class="col-sm-2 control-label">Stok</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="book[stock]" value="{{$book->stock}}">
+                            <input type="text" class="form-control" name="book[stock]" value="{{$book->stock}}" readonly>
                         </div>
                     </div>
                     <div class="form-group">

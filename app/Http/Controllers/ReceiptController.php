@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Transaction;
+use App\TransactionDetail;
 use App\User;
 use Illuminate\Http\Request;
 use App\Jobs\Transaction\CreateTransaction;
@@ -21,6 +22,7 @@ class ReceiptController extends Controller
     public function index()
     {
         $receipts = Transaction::type('Receive')->paginate(5);
+//        $details = TransactionDetail::type('Receive');
         return view('/layouts/transaction/receipts/receive', ['receipts' => $receipts]);
     }
 

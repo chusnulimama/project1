@@ -5,6 +5,7 @@ namespace App\Jobs\Book;
 use App\Book;
 use App\Jobs\Job;
 use App\Events\Book\WasCreated;
+use App\User;
 use Illuminate\Http\Request;
 use Guzzle\Service\Command\RequestSerializerInterface;
 use Illuminate\Contracts\Bus\SelfHandling;

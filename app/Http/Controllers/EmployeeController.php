@@ -77,7 +77,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::where('description', '=', 'User')->get();
         return view('layouts.master.employee.employee_edit')->with('roles', $roles)->with('user', $user);
     }
 

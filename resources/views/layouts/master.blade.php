@@ -12,9 +12,9 @@
     <!--external css-->
     {!! HTML::style('assets/font-awesome/css/font-awesome.css') !!}
     {{--<link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css" type="text/css" media="screen">--}}
-    <link rel="stylesheet" href="assets/js/gritter/css/jquery.gritter.css" type="text/css">
-    <link rel="stylesheet" href="assets/lineicons/style.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <link rel="stylesheet" href="/assets/js/gritter/css/jquery.gritter.css" type="text/css">
+    <link rel="stylesheet" href="/assets/lineicons/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css">
 
     {!! HTML::style('assets/css/style-responsive.css') !!}
     {!! HTML::style('assets/css/style.css') !!}

@@ -32,6 +32,11 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+//    public function user_detail()
+//    {
+//        return $this->belongsTo(UserDetail::class, 'user_id', 'id');
+//    }
+
     public function deliveries()
     {
         //untuk mengetahui transaksi sebagai status apa

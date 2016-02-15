@@ -15,7 +15,7 @@
                             <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name', $user->detail_name)}}">
                             <input type="hidden" class="form-control" name="user[username]" value="{{old('user.username', $user->username)}}">
                             <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="2">
+                            <input type="hidden" class="form-control" name="roles[]" value="3">
                             {!! $errors->first('user.detail_name', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
@@ -59,8 +59,9 @@
 
                     <div class="form-group">
                         <div class="col-sm-2">
-                            <a href="{!! URL::to('/supp') !!}" class="btn btn-warning">Batal</a>
+                            <a href="{{route('supp')}}" class="btn btn-warning">Batal</a>
                             <input type="submit" name="btn_simpan" value="Simpan" class="btn btn-default">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                         </div>
                     </div>
                 </form>

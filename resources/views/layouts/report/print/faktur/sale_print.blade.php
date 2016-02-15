@@ -18,7 +18,7 @@
                             </th>
                             <th class="col-md-10">
                                 <h5>: {{$sales->transaction_id}}</h5>
-                                <h5>: {{$sales->user_id}}</h5>
+                                <h5>: {{$sales->user->detail->name}}</h5>
                             </th>
                         </tr>
                         </thead>
@@ -36,7 +36,7 @@
 
                         @foreach($sales->trans_detail()->get() as $sale)
                             <tr>
-                                <td>{{$sale->book_id}}</td>
+                                <td>{{$sale->book->name}}</td>
                                 <td>{{$sale->qty}}</td>
                                 <td style="text-align: right">{{$sale->price}}</td>
                                 <td style="text-align: right">{{$sale->subtotal}}</td>
@@ -57,12 +57,13 @@
                         <label for="">Surabaya, {{$today}}</label><br><br><br><br>
                         <label for="">{{$sale->user_id}}</label>
                     </div>
-                    <button type="button" class="btn btn-default hidden-print" onclick="window.print()">Cetak <i class="fa fa-print"></i></button>
                     {{--<a href="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();"> Print--}}
 
                     {{--</a>--}}
                 </form>
             </div>
         </div>
+        <br>
+        <button type="button" class="btn btn-default hidden-print" onclick="window.print()">Cetak <i class="fa fa-print"></i></button>
     </div>
 @endsection

@@ -8,16 +8,35 @@
     <h5 style="text-align: center">Username       : {{$employee->username}}</h5>
     <h5 style="text-align: center">Password       : ******</h5>
     <hr>
-    <table>
+    <table class="col-md-12">
         <tr>
-            <td style="padding-left: 50px">
-                <p>E-mail         : {{$employee->email}}</p>
-                <p>Alamat         : {{$employee->detail_address}}</p>
-                <p>Kota           : {{$employee->detail_city}}</p>
+            <td style="padding-left: 45px">
+                <p>E-mail</p>
+                <p>No.Telp</p>
             </td>
-            <td style="padding-left: 60px">
-                <p>No.Telp        : {{$employee->detail_phone}}</p>
+            <td>
+                <p>: {{$employee->email}}</p>
+                <p>: {{$employee->detail_phone}}</p>
+            </td>
+            <td>
+                <p>Alamat</p>
+                <p>Kota</p>
+            </td>
+            <td>
+                <p>: {{$employee->detail_address}}</p>
+                <p>: {{$employee->detail_city}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">
                 <p>Keterangan     : {{$employee->detail_note}}</p>
+
+                <div>
+                    <div class="switch switch-square" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                        <input type="checkbox" checked="Actived">
+                        <input type="checkbox" checked="true">
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

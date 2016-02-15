@@ -17,9 +17,9 @@ class ChangeIdUser
         try{
             $role = $event->user->roles()->get();
             //ambil data dari model roles()
-            if (in_array($role[0]->id, [2, 3, 4]))
+            if (in_array($role[0]->id, [3, 4, 5]))
             {
-                $event->user->username = str_pad($event->user->username.$event->user->id, 8, '0', STR_PAD_LEFT);
+                $event->user->username = str_pad($event->user->username.$event->user->id, 8, '0', STR_PAD_RIGHT);
                 //$event->user->username = uniqid();
                 $event->user->save();
             }

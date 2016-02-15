@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $query = User::query();
         $data = [];
-        $data['users'] = $query->orderBy('id', 'asc')->paginate(5);
+        $data['users'] = $query->orderBy('id', 'desc')->paginate(5);
         return view('layouts.settings.user.user', $data);
     }
 

@@ -56,7 +56,7 @@ Route::get('/customer', [
 Route::get('/customer/create', 'CustController@create');
 Route::post('/customer/create', 'CustController@store');
 Route::get('/customer/edit/{user_id}', 'CustController@edit');
-Route::post('customer/update/{user_id}', [
+Route::post('/customer/update/{user_id}', [
     'as'    => 'cust.update',
     'uses'  => 'CustController@update']);
 Route::post('/customer/destroy/{user_id}', 'CustController@destroy');
@@ -80,9 +80,10 @@ Route::get('/supplier', [
     'uses'   => 'SuppController@index']);
 Route::get('/supplier/create', 'SuppController@create');
 Route::post('/supplier/create', 'SuppController@store');
-Route::get('/supplier/edit/{user_id}', [
-    'as'     => 'supp.update',
-    'uses'   => 'SuppController@update']);
+Route::get('/supplier/edit/{user_id}', 'SuppController@edit');
+Route::post('/supplier/update/{user_id}', [
+    'as'    => 'supp.update',
+    'uses'  => 'SuppController@update']);
 Route::post('/supplier/destroy/{user_id}', 'SuppController@destroy');
 
 //role control

@@ -30,11 +30,14 @@ class ReportReceiveController extends Controller
             $subQuery->groupBy('date_trans');
         })->get();
 
+        $report->sum('total');
+
         $data = [
             'from' => $start,
             'until'=> $until,
             'report' => $report
         ];
+
 
         return view('layouts/report/table/receipt_report', $data);
     }

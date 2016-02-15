@@ -29,7 +29,7 @@
                             {{--*/$number = $startNumber + ($key + 1);/*--}}
                         <td>{{$number}}</td>
                         <td>{{$receive->transaction_id}}</td>
-                        <td>{{$receive->user_id}}</td>
+                        <td>{{$receive->user->detail->name}}</td>
                         <td>{{$receive->date_trans}}</td>
                         <td class="centered">
                             <a href="{{url('/receive/view/'.$receive->id)}}" class="btn btn-primary btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>

@@ -18,7 +18,7 @@
 
         @foreach($receipt->trans_detail()->get() as $receive)
         <tr>
-            <td>{{$receive->book_id}}</td>
+            <td>{{$receive->book->name}}</td>
             <td>{{$receive->qty}}</td>
             <td style="text-align: right">{{$receive->price}}</td>
             <td style="text-align: right">{{$receive->subtotal}}</td>

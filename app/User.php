@@ -49,6 +49,12 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
 
+    public function books()
+    {
+        //untuk pivot tabel mengetahui buku dilakukan oleh user apa
+        return $this->belongsToMany(User::class, 'book_users', 'user_id', 'book_id');
+    }
+
     public function getDetailNameAttribute()
     {
         return (is_object($this->detail)) ? $this->detail->name : '';
@@ -107,6 +113,26 @@ class User extends Model implements AuthenticatableContract,
        {
            return $this->roles[0]->description;
        }
+    }
+
+    public function getBookAttribute()
+    {
+        $book = [];
+
+        foreach ($this->books as $_book)
+        {
+            $book[] = $_book->name;
+        }
+
+        return implode(', ', $book);
+    }
+
+    public function getBookUsernameAttribute()
+    {
+        if($this->books[0] instanceof Book)
+        {
+            return $this->books[0]->username;
+        }
     }
 
     public function setPasswordAttribute($value)

@@ -18,4 +18,9 @@ class Book extends Model
     protected $fillable = ['ISBN', 'name', 'author', 'publisher', 'supplier', 'category', 'release', 'price','stock'];
 
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'book_users', 'user_id', 'book_id');
+    }
 }

@@ -15,7 +15,7 @@
                             <input type="text" class="form-control" name="detail[name]" value="{{old('detail.name')}}">
                             <input type="hidden" class="form-control" name="user[username]" value="SUPP.0">
                             <input type="hidden" class="form-control" name="user[password]" value="1234">
-                            <input type="hidden" class="form-control" name="roles[]" value="2">
+                            <input type="hidden" class="form-control" name="roles[]" value="3">
                         </div>
                     </div>
                     <div class="form-group">

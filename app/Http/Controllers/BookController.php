@@ -24,12 +24,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = DB::table('books')->paginate(5);
-        $books =
-            [
-              'books' => $books
-            ];
-        return view('/layouts/master/books/books', $books);
+        $query = Book::query();
+        $books = [];
+        $books['books'] = $query->orderBy('id', 'desc')->paginate(5);
+        return view('layouts.master.books.books', $books);
     }
 
     /**
@@ -39,13 +37,11 @@ class BookController extends Controller
      */
     public function create()
     {
-        $publishers = User::whereHas('roles', function($subQuery){
-            $subQuery->where('description', 'Publisher');
-        })->get();
-        $suppliers = User::whereHas('roles', function($subQuery){
+        $data = [];
+        $data['users'] = User::whereHas('roles', function($subQuery){
             $subQuery->where('description', 'Supplier');
         })->get();
-        return view('/layouts/master/books/books_add')->with('publishers', $publishers)->with('suppliers', $suppliers);
+        return view('/layouts/master/books/books_add')->with('data', $data);
     }
 
     /**

@@ -11,7 +11,7 @@ namespace App\Listeners\Transaction;
 
 use App\Events\Transaction\WasCreated;
 
-class SetPriceBook
+class SetSuppBook
 {
     public function handle(WasCreated $event)
     {
@@ -26,18 +26,12 @@ class SetPriceBook
             //memasukkan harga barang yg diterima dari supp
             if($transaction->type == 'Receive')
             {
-                if($book->qty <= 0)
-                {
-                    $book->price = (int) $detail->price + ((int) $detail->price * 30/100);
-                } else {
-                    $last = (int) $book->price * (int) $book->stock;
-                    $new = ((int) $detail->price + ((int) $detail->price * 30/100)) * (int) $detail->qty;
-                    $sum = (int) $book->stock + (int) $detail->qty;
+                //set user transaction
+                $users = $this->request->input('users', []);
+                $book->user()->sync($users);
 
-                    $book->price = $last * $new / $sum;
-                }
-
-                $book->supplier = $event->transaction->user->name;
+                //set nama supplier di tabel book
+                $book->supplier = $event->transaction->user_id;
 
             }
 

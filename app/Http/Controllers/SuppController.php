@@ -8,7 +8,6 @@ use App\Jobs\User\UpdateUser;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Controllers\Controller;
@@ -37,8 +36,6 @@ class SuppController extends Controller
     public function create()
     {
         $roles = Role::where('description', '=', 'Supplier')->get();
-
-
         return view('layouts/master/supp/supplier_add', ['roles' => $roles]);
     }
 
@@ -78,8 +75,8 @@ class SuppController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
-        return view('/layouts/master/supp/supp_edit')->with('roles', $roles)->with('user', $user);
+        $roles = Role::where('description', '=', 'Supplier')->get();
+        return view('layouts.master.supp.supplier_edit')->with('roles', $roles)->with('user', $user);
     }
 
     /**
@@ -92,7 +89,7 @@ class SuppController extends Controller
     public function update(Request $request, User $user)
     {
         try{
-            $this->dispatch(new UpdateUser($request));
+            $this->dispatch(new UpdateUser($user, $request));
         } catch(\Exception $msgerror){
             dd($msgerror->getMessage());
         }

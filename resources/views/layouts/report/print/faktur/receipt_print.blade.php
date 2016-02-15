@@ -18,7 +18,7 @@
                             </th>
                             <th class="col-md-10">
                                 <h5>: {{$receipt->transaction_id}}</h5>
-                                <h5>: {{$receipt->user_id}}</h5>
+                                <h5>: {{$receipt->user->detail->name}}</h5>
                             </th>
                         </tr>
                         </thead>
@@ -36,8 +36,8 @@
 
                         @foreach($receipt->trans_detail()->get() as $receive)
                             <tr>
-                                <td>{{$receive->book_id}}</td>
-                                <td>{{$receive->qty}}</td>
+                                <td>{{$receive->book->name}}</td>
+                                <td style="text-align: center;">{{$receive->qty}}</td>
                                 <td style="text-align: right">{{$receive->price}}</td>
                                 <td style="text-align: right">{{$receive->subtotal}}</td>
                             </tr>
@@ -48,7 +48,7 @@
                         <th class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-addon">Rp</div>
-                                <input type="text" class="form-control col-md-3" name="transaction[total]" value="{{$receipt->total}}" style="text-align: right" readonly>
+                                <input type="text" class="form-control col-md-3 noPrint" name="transaction[total]" value="{{$receipt->total}}" style="text-align: right" readonly>
                             </div>
                         </th>
                         </tfoot>
@@ -56,12 +56,14 @@
                     <div style="text-align: right">
                         <label for="">Surabaya, {{$today}}</label><br><br><br><br>
                     </div>
-                    <button type="button" class="btn btn-default hidden-print" onclick="window.print()">Cetak <i class="fa fa-print"></i></button>
                     {{--<a href="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();"> Print--}}
                         {{--<i class="fa fa-print"></i>--}}
                     {{--</a>--}}
                 </form>
             </div>
         </div>
+        <br>
+        <button type="button" class="btn btn-default hidden-print" onclick="window.print()">Cetak <i class="fa fa-print"></i></button>
     </div>
     @endsection
+

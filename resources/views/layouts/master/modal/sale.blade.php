@@ -18,7 +18,7 @@
 
         @foreach($sales->trans_detail()->get() as $sale)
             <tr>
-                <td>{{$sale->book_id}}</td>
+                <td>{{$sale->book->name}}</td>
                 <td>{{$sale->qty}}</td>
                 <td style="text-align: right">{{$sale->price}}</td>
                 <td style="text-align: right">{{$sale->subtotal}}</td>
