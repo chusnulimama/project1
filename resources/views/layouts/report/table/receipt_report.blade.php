@@ -1,10 +1,9 @@
 @extends('layouts.master')
 @section('content')
 
-    <h3>Laporan Transaksi Penerimaan Barang</h3>
-
-    <form class="form-inline mb" action="{{url('/report/receive')}}" >
+    <form class="form-inline mb range" action="{{url('/report/receive')}}" >
         {{--<fieldset>--}}
+        <h3>Laporan Transaksi Penerimaan Barang</h3>
         <div class="form-group">
             <label for="dtp-input2" class="control-label">Tanggal</label>
             <input type="text" class="form-control" name="from" value="{{ $from }}">
@@ -24,7 +23,13 @@
 
     <div class="col-md-12">
         <div class="content-panel">
-            <div class="wrapper">
+            <div class="padding-10">
+                <h4 style="text-align: center">Toko Buku</h4>
+                <h4 style="text-align: center">IBOE Mitra Media</h4>
+                <h4 style="text-align: center">Laporan Rekapitulasi Transaksi Pembelian Barang</h4>
+                <h5 style="text-align: center">{{$from}} s.d {{$until}}</h5>
+                <h6 style="text-align: right">Cetak : {{$today}}</h6>
+                <hr>
                 <table class="table table-striped table-advance table-hover table-bordered">
                     <thead>
                     <tr class="heading">
@@ -62,6 +67,8 @@
                 </table>
             </div>
         </div>
+        <br>
+        <button type="button" class="btn btn-default hidden-print" onclick="window.print()">Cetak <i class="fa fa-print"></i></button>
     </div>
 
 @endsection

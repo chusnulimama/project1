@@ -20,6 +20,7 @@ class ReportReceiveController extends Controller
      */
     public function index()
     {
+        $today = date('d - m - Y');
         $start = request()->input('from', Carbon::now()->format('d-m-Y'));
         $until = request()->input('until', Carbon::now()->format('d-m-Y'));
 
@@ -40,9 +41,10 @@ class ReportReceiveController extends Controller
 //        });
 
         $data = [
-            'from' => $start,
-            'until'=> $until,
-            'report' => $report
+            'from'      => $start,
+            'until'     => $until,
+            'report'    => $report,
+            'today'     => $today
         ];
 
 

@@ -15,6 +15,7 @@ html{
 @media only print {
     header{display: none !important;}
     aside {display: none !important;}
+    .range {display: none !important;}
     #main-content { margin: 0 !important;}
     #main-content .wrapper { margin: 0 !important; padding: 10px !important;}
 

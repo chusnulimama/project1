@@ -18,6 +18,7 @@ class ReportSaleController extends Controller
      */
     public function index()
     {
+        $today = date('d - m - Y');
         $start = request()->input('from', Carbon::now()->format('d-m-Y'));
         $until = request()->input('until', Carbon::now()->format('d-m-Y'));
 
@@ -32,6 +33,7 @@ class ReportSaleController extends Controller
             'from'      => $start,
             'until'     => $until,
             'report'    => $report,
+            'today'     => $today
         ];
 
         return view('layouts/report/table/sale_report', $data);
