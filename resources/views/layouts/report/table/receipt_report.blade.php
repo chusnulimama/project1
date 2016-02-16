@@ -38,22 +38,25 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{--*/$grand = 0;/*--}}
                     @foreach($report as $data)
+                        {{--*/$total = $data->subtotal;/*--}}
                         <tr>
                             <td>{{ $data->master->date_trans}}</td>
                             <td>{{ $data->master->transaction_id}}</td>
                             <td>{{ $data->master->user->detail->name}}</td>
                             <td>{{ $data->book->name}}</td>
-                            <td>{{ $data->qty}}</td>
-                            <td style="text-align: right">{{ $data->price}}</td>
-                            <td style="text-align: right">{{ $data->subtotal}}</td>
+                            <td style="text-align: right">{{ $data->qty}}</td>
+                            <td style="text-align: right">{{ number_format($data->price) }}</td>
+                            <td style="text-align: right">{{ number_format($total) }}</td>
                         </tr>
-                    @endforeach
+                        {{-- */$grand = $grand + $total;/* --}}
                     </tbody>
+                    @endforeach
                     <tfoot>
                     <tr>
                         <td colspan="6" style="text-align: right"><h4>TOTAL</h4></td>
-                        <td><h4>{{$report}}</h4></td>
+                        <td style="text-align: right;"><h4>Rp {{ number_format($grand) }}</h4></td>
                     </tr>
                     </tfoot>
                 </table>

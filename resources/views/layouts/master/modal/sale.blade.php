@@ -19,9 +19,9 @@
         @foreach($sales->trans_detail()->get() as $sale)
             <tr>
                 <td>{{$sale->book->name}}</td>
-                <td>{{$sale->qty}}</td>
-                <td style="text-align: right">{{$sale->price}}</td>
-                <td style="text-align: right">{{$sale->subtotal}}</td>
+                <td style="text-align: right">{{$sale->qty}}</td>
+                <td style="text-align: right">{{number_format($sale->price)}}</td>
+                <td style="text-align: right">{{number_format($sale->subtotal)}}</td>
             </tr>
         </tbody>
         @endforeach
@@ -30,7 +30,7 @@
         <th class="col-md-3">
             <div class="input-group">
                 <div class="input-group-addon">Rp</div>
-                <input type="text" class="form-control col-md-3" name="transaction[total]" value="{{$sales->total}}" style="text-align: right" readonly>
+                <input type="text" class="form-control col-md-3" name="transaction[total]" value="{{number_format($sales->total)}}" style="text-align: right" readonly>
             </div>
         </th>
         </tfoot>

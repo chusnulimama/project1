@@ -116,7 +116,7 @@
 
                             if ($('table#transactionDetails tr#book-' + id).length > 0)
                             {
-                                alert('ojok ditambahi maneh cak');
+                                alert('Buku ini telah diambil!');
                             } else {
                                 $('table#transactionDetails tbody').append(response);
                             }

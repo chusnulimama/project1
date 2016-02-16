@@ -29,8 +29,15 @@ class ReportReceiveController extends Controller
             $subQuery->where('date_trans', '<=', Carbon::createFromFormat('d-m-Y', $until)->format('Y-m-d'));
             $subQuery->groupBy('date_trans');
         })->get();
+//
+//        $items = Transaction::where('total');
+//        $summary = $report->sum('master', function($items) use($items){
+//            return $items->amount;
+//        });
 
-        $report->sum('total');
+//        $summary = $report->sum(function($item) {
+//            return count($item['subtotal']);
+//        });
 
         $data = [
             'from' => $start,

@@ -8,13 +8,13 @@
     <td class="col-md-3">
         <div class="input-group">
             <div class="input-group-addon">Rp</div>
-            <input type="number" class="form-control input-price" max="1000000" name="items[price][]" value="{{ is_object($detail) ? $detail->price : "0" }}" style="text-align: right">
+            <input type="number" class="form-control input-price" max="1000000" name="items[price][]" value="{{ number_format(is_object($detail) ? $detail->price : "0") }}" style="text-align: right">
         </div>
     </td>
     <td class="col-md-3">
         <div class="input-group">
             <div class="input-group-addon">Rp</div>
-            <input type="text" class="form-control col-md-3 sub_total" style="text-align: right" name="items[subtotal][]" value="{{ is_object($detail) ? $detail->subtotal : "0" }}" readonly>
+            <input type="text" class="form-control col-md-3 sub_total" style="text-align: right" name="items[subtotal][]" value="{{ number_format(is_object($detail) ? $detail->subtotal : "0") }}" readonly>
         </div>
     </td>
     <td style="text-align: center">
